@@ -1,0 +1,230 @@
+{% load static %}
+
+  <header>
+
+    <!-- <div class="topbsp hidden-xs text-center">
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12"><p><span class="htitle">Super Sale Extra 50% Off</span><span class="ptitle">On First Five Orders...</span><a class="shop" href="#">shopnow</a></p><button id="closeButton">
+          <svg width="15px" height="15px"><use xlink:href="#close"></use></svg></button></div>
+    </div>
+  </div>
+</div> -->
+
+    <!-- <div class="hsticky">
+    <div class="row hbottom">
+      <div class="col-sm-8 col-xs-12 text-left offtitle"><p>Get 30% Off On Selected Items<span><i class="fa fa-envelope"></i> company@example.com</span></p></div>
+   
+    </div>
+</div> -->
+    <div class="homemenu">
+      <div class="">
+        <div class="row">
+          <div class="col-xs-2 col-sm-1 hidden-md hidden-lg hidden-xl appmenu"></div>
+          <div id="right-colume-1" class="col-lg-6 col-md-6 col-sm-8 col-xs-12 headmenu">
+            <div class=" menusp d-inline-block">
+              <nav id="menu" class="navbar">
+                <div class="navbar-header">
+                  <button type="button" class="btn-navbar navbar-toggle" onclick="openNav()" data-toggle="collapse"
+                    data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+                </div>
+                <h3 class="wrmenu collapsed" data-toggle="collapse" data-target="#under-menu" aria-expanded="false">
+
+                  <div class="navbar-header">
+                    <button type="button" class="btn-navbar navbar-toggle">
+                      <svg width="16px" height="16px">
+                        <use xlink:href="#menu"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </h3>
+                <div id="mySidenav" class="sidenav">
+                  <div id="under-menu" class="collapse" aria-expanded="false" style="height: 2px;">
+                    <div class="close-nav hidden-md hidden-lg hidden-xl">
+                      <span class="categories">Categories</span>
+                      <a href="javascript:void(0)" class="closebtn pull-right" onclick="closeNav()"><i
+                          class="fa fa-close"></i></a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                      <ul class="nav navbar-nav">
+
+                        <li class="m-menu moremenuh"><a
+                          href="{% url 'store' %}">All Products</a></li>
+                        {% for category in links %}
+                        <li class="m-menu moremenuh"><a
+                            href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+                        {% endfor %}  
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+
+
+              <script type="text/javascript">
+                function headermenu() {
+                  if (jQuery(window).width() < 992) {
+                    jQuery('ul.nav li.dropdown a.header-menu').attr("data-toggle", "dropdown");
+                  }
+                  else {
+                    jQuery('ul.nav li.dropdown a.header-menu').attr("data-toggle", "");
+                  }
+                }
+                $(document).ready(function () { headermenu(); });
+                jQuery(window).resize(function () { headermenu(); });
+                jQuery(window).scroll(function () { headermenu(); });
+              </script>
+            </div>
+            <ul class="sblock">
+              <li><a href="{% url 'home' %}">home</a></li>
+              <li><a href="index.php-34.html?route=product/special">specials</a></li>
+              <li><a href="index.php-35.html?route=information/contact">contact</a></li>
+              <li><a href="index.php-36.html?route=account/return/add">returns</a></li>
+              <li><a href="index.php-37.html?route=information/blogger/blogs">blog</a></li>
+
+            </ul>
+          </div>
+
+          <div id="logo" class="col-lg-3 col-md-2 col-sm-3 col-xs-12 hlogo"><a
+              href="{% url 'home' %}"><img src="{% static 'image/catalog/logo.png' %}" title="fashpad" alt="fashpad"
+                class="img-responsive"></a> </div>
+          <div id="top-links" class="col-lg-3 col-md-4 col-sm-8 col-xs-12 text-right">
+            <ul class="list-inline">
+              <li class="serchapp d-inline-block">
+                <div id="search" class="desktop-search d-inline-block">
+                  <div class="d-search">
+                    <button id="search_toggle" class="search-toggle" data-toggle="collapse" onclick="openSearch()">
+                      <svg>
+                        <use xlink:href="#hsearch"></use>
+                      </svg>
+                    </button>
+                  </div>
+                  <div id="search" class="wbSearch">
+                    <div id="search_block_top">
+                      <select id="madebyhand-search-category">
+                        <option value="0">Categories</option>
+                        <option value="79">fashion</option>
+                        <option value="20"> Women</option>
+                        <option value="74">&nbsp;&nbsp;&nbsp;&nbsp;fashion Wear</option>
+                        <option value="75">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dresses</option>
+                        <option value="76">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-Shirts</option>
+                        <option value="27">&nbsp;&nbsp;&nbsp;&nbsp;Women Footwear</option>
+                        <option value="59">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flats</option>
+                        <option value="60">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heels</option>
+                        <option value="81">kides</option>
+                        <option value="18">men</option>
+                        <option value="46">&nbsp;&nbsp;&nbsp;&nbsp;Bottomwear</option>
+                        <option value="45">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jeans</option>
+                        <option value="69">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-Shirts</option>
+                        <option value="68">&nbsp;&nbsp;&nbsp;&nbsp;Topwear </option>
+                        <option value="70">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Casual Shirts</option>
+                        <option value="71">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formal Shirts</option>
+                        <option value="25">jeans</option>
+                        <option value="28">&nbsp;&nbsp;&nbsp;&nbsp;accessories</option>
+                        <option value="67">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clothes</option>
+                        <option value="66">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;men</option>
+                        <option value="65">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;women</option>
+                        <option value="30">&nbsp;&nbsp;&nbsp;&nbsp;fashion</option>
+                        <option value="64">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorts</option>
+                        <option value="31">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clothes</option>
+                        <option value="32">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jeans</option>
+                        <option value="29">&nbsp;&nbsp;&nbsp;&nbsp;Clothes</option>
+                        <option value="63">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dresses</option>
+                        <option value="35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-Shirts</option>
+                        <option value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;women</option>
+                        <option value="17">T-Shirts</option>
+                        <option value="24">Clothes</option>
+                        <option value="33">Sports </option>
+                        <option value="80">dresses</option>
+                      </select>
+                      <div class="input-group">
+                        <input type="text" name="search" value="" placeholder="Search..."
+                          class="search_query form-control input-lg madebyhand-search">
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-primary btn-lg"><i
+                              class="fa fa-search  hidden-sm hidden-md hidden-lg"></i> <svg width="15px" height="15px">
+                              <use xlink:href="#hsearch"></use>
+                            </svg></button>
+                          <a href="javascript:void(0)" class="closebtn close-nav" onclick="closeSearch()"><i
+                              class="fa fa-close"></i></a>
+                        </div>
+                        <!-- madebyhand Search Start  -->
+                        <div class="madebyhand-search text-left">
+                          <div class="madebyhand-search-loader" style="display: none;">
+                            <div class="loaders"></div>
+                          </div><!-- Add Loader -->
+                          <div class="madebyhand-search-result"><!-- search results --></div>
+                        </div>
+                        <!-- madebyhand Search End  -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <script type="text/javascript">
+                  $(document).ready(function () {
+                    $('.desktop-search input[type="text"]').focus(function () {
+                      $(this).parent().addClass("any_class");
+                    });
+
+                    $('.desktop-search input[type="text"]').blur(function () {
+                      $(this).parent().removeClass("any_class");
+                    });
+
+
+                    $(document).ready(function () {
+                      $("#xs-zoom").owlCarousel({
+                        itemsCustom: [
+                          [0, 1]
+                        ],
+                        // autoPlay: 1000,
+                        navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                        navigation: false,
+                        pagination: true
+                      });
+                    });
+                  });
+                </script>
+
+              </li>
+              <li class="dropdown inuser">
+                <a href="index.php-39.html?route=account/account" title="My Account" class="dropdown-toggle"
+                  data-toggle="dropdown">
+                  <svg>
+                    <use xlink:href="#huser"></use>
+                  </svg><!-- <span class="hidden-xs">&nbsp;Register</span> -->
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right user-down haccount hlogout">
+                  <h5 class="text-left">Your Account</h5>
+                  <h6 class="text-left">Access account and manage orders</h6>
+                  <li class="acd"><a href="index.php-38.html?route=account/register"><i
+                        class="fa fa-user-plus"></i>Register</a></li>
+                  <li class="acd"><a href="index.php-39.html?route=account/login"><i class="fa fa-lock"></i>Login</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="cart-but">
+                <div id="cart" class="btn-group btn-block">
+                  <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="dropdown-toggle">
+                    <svg>
+                      <use xlink:href="#hcart"></use>
+                    </svg><span id="cart-total">0 <span>items</span></span></button>
+                  <ul class="dropdown-menu pull-right">
+                    <li>
+                      <p class="text-center">Your shopping cart is empty!</p>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+            </ul>
+
+          </div>
+          <div class="appendsearch col-xs-12"></div>
+
+        </div>
+      </div>
+    </div>
+
+  </header>

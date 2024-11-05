@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="breadbg">
+    <div class="container">
+      <div class="row">
+        <ul class="breadcrumb">
+          <li><a href="{% url 'store' %}"><i class="fa fa-home"></i></a></li>
+          <li><a href="{{ single_product.images.url }}">{{ single_product.product_name}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="product-product" class="container">
+
+    <div class="row">
+      <div id="content" class="col-xs-12">
+        <div class="productbg">
+          <div class="row">
+            <div class="col-sm-6 col-lg-5 col-md-6 col-xs-12 proimg sticky">
+              <ul class="thumbnails">
+                <li><a class="thumbnail" href="{{ single_product.images.url }}"
+                    title="{{ single_product.product_name }}">
+                    <img
+                      data-zoom-image="{{ single_product.images.url }}"
+                      src="{{ single_product.images.url }}" id="zoom_03" class="img-responsive center-block"
+                      alt="image">
+                  </a>
+                </li>
+                <!-- <div class="row">
+                  <li id="gallery_01" class="owl-carousel"> <a
+                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/6-800x800.jpg' %}"
+                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/6-800x800.jpg' %}"
+                      href="{% static 'image/cache/catalog/product/6-800x800.jpg' %}" class="col-xs-12 addpa">
+                      <img src="{% static 'image/cache/catalog/product/6-120x120.jpg' %}" class="img-responsive center-block"
+                        alt="additional image">
+                    </a> <a
+                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/28-800x800.jpg' %}"
+                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/28-800x800.jpg' %}"
+                      href="{% static 'image/cache/catalog/product/28-800x800.jpg' %}" class="col-xs-12 addpa">
+                      <img src="{% static 'image/cache/catalog/product/28-120x120.jpg' %}" class="img-responsive center-block"
+                        alt="additional image">
+                    </a> <a
+                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/27-800x800.jpg' %}"
+                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/27-800x800.jpg' %}"
+                      href="{% static 'image/cache/catalog/product/27-800x800.jpg' %}" class="col-xs-12 addpa">
+                      <img src="{% static 'image/cache/catalog/product/27-120x120.jpg' %}" class="img-responsive center-block"
+                        alt="additional image">
+                    </a> <a
+                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/24-800x800.jpg' %}"
+                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/24-800x800.jpg' %}"
+                      href="{% static 'image/cache/catalog/product/24-800x800.jpg' %}" class="col-xs-12 addpa">
+                      <img src="{% static 'image/cache/catalog/product/24-120x120.jpg' %}" class="img-responsive center-block"
+                        alt="additional image">
+                    </a> <a
+                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/23-800x800.jpg' %}"
+                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/23-800x800.jpg' %}"
+                      href="{% static 'image/cache/catalog/product/23-800x800.jpg' %}" class="col-xs-12 addpa">
+                      <img src="{% static 'image/cache/catalog/product/23-120x120.jpg' %}" class="img-responsive center-block"
+                        alt="additional image">
+                    </a> </li>
+                </div> -->
+              </ul>
+            </div>
+            <div class="col-lg-7 col-md-6 col-xs-12 col-sm-6 pro-content">
+              <h1>{{ single_product.product_name }}</h1>
+              <hr class="producthr">
+              <ul class="list-unstyled">
+                <li><span class="text-decor">Brand:</span><a
+                    href="index.php-156.html?route=product/manufacturer/info&amp;manufacturer_id=8"
+                    class="textdeb">Apple</a></li>
+                <li><span class="text-decor">Product Code:</span>Product 15</li>
+                <li><span class="text-decor">Collection:</span>100 product</li>
+                <li><span class="text-decor">Availability:</span>In Stock</li>
+                <hr class="producthr">
+              </ul>
+              <ul class="list-unstyled">
+                <li class="text-decor-bold">
+                  <h2 class="pro-price">$122.00</h2>
+                </li> <!--            <li>Ex Tax:$100.00</li> -->
+                <li class="text-decor-bold">Price in reward points:400</li>
+                <li>
+                  <hr class="producthr">
+                </li>
+                
+              </ul>
+              <div id="product">
+                <hr class="producthr">
+                <h3>Available Options</h3>
+                <div class="form-group required">
+                  <label class="control-label text-decorop">Radio</label>
+                  <div id="input-option218" class="custom-radio">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="option[218]" value="5">Small (+$12.00) </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="option[218]" value="6">Medium (+$24.00) </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="option[218]" value="7">Large (+$36.00) </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group required">
+                  <label class="control-label text-decorop" for="input-option217">Select</label>
+                  <select name="option[217]" id="input-option217" class="form-control">
+                    <option value=""> --- Please Select --- </option>
+                    <option value="4">Red (+$4.80) </option>
+                    <option value="3">Blue (+$3.60) </option>
+                    <option value="1">Green (+$1.20) </option>
+                    <option value="2">Yellow (+$2.40) </option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <hr class="producthr">
+                  <button type="button" id="button-cart" data-loading-text="Loading..."
+                    class="btn pcrt add-to-cart btn-primary">add to cart</button>
+                  <button type="button" data-toggle="tooltip" title="Add to Wish List" class="btn pcrt btn-primary"
+                    onclick="wishlist.add('42');"><svg width="18px" height="17px">
+                      <use xlink:href="#heart"></use>
+                    </svg></button>
+                  <button type="button" data-toggle="tooltip" title="Compare this Product" class="btn pcrt  btn-primary"
+                    onclick="compare.add('42');"><svg width="18px" height="17px">
+                      <use xlink:href="#compare"></use>
+                    </svg></button>
+                  <hr class="producthr">
+                </div>
+                <!-- Quantity option end -->
+                <div class="alert alert-info palert"><i class="fa fa-info-circle"></i>This product has a minimum
+                  quantity of 2</div>
+              </div>
+              <div class="rating">
+                <li><span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i
+                      class="fa fa-star-o fa-stack-1x"></i></span><span class="fa fa-stack"><i
+                      class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span><span
+                    class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i
+                      class="fa fa-star-o fa-stack-1x"></i></span><span class="fa fa-stack"><i
+                      class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span><span
+                    class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i
+                      class="fa fa-star-o fa-stack-1x"></i></span> </li>
+                <li class="proreview">
+                  <a id="ratecount" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">1
+                    reviews</a>
+                </li>
+                <li>
+                  <a id="ratep" href="#rt" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write
+                    a review</a>
+                </li>
+                <hr class="producthr">
+                <!-- AddToAny BEGIN -->
+                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                  <a class="a2a_button_facebook"></a>
+                  <a class="a2a_button_twitter"></a>
+                  <a class="a2a_button_google_plus"></a>
+                  <a class="a2a_button_pinterest"></a>
+                  <a class="a2a_button_linkedin"></a>
+                  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                </div>
+                <script async="" src="../../menu/page.js"></script>
+                <!-- AddToAny END -->
+              </div>
+            </div>
+          </div>
+          <div class="product-tab">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
+             
+              <li><a href="#tab-review" data-toggle="tab">Reviews (1)</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-description">
+                <p>
+                  Vivamus eros velit, tincidunt sed finibus et, porttitor non urna. Nulla
+                  dictum ac enim eget feugiat. Nullam ac purus arcu. Pellentesque pharetra
+                  accumsan accumsan. Praesent non sapien vel lectus faucibus blandit.
+                  Aliquam viverra est ac vestibulum pretium. Praesent consequat non lectus
+                  eget pharetra. Nam fringilla metus ipsum, ut pulvinar justo facilisis
+                  laoreet. Vestibulum sollicitudin mi quis ligula varius dignissim.
+                </p>
+
+                Proin rutrum, felis quis commodo sollicitudin, neque mauris semper ex, a
+                malesuada dui quam vitae augue. Nunc quis est sed magna vestibulum
+                porttitor ut nec est. Pellentesque egestas neque ut semper commodo.
+                Morbi mauris diam, maximus id nunc vel, molestie bibendum lorem.
+                Praesent diam tellus, dictum vel massa et, ultrices aliquam ante.
+                Praesent dictum quis risus sit amet aliquam. Sed fermentum tortor a mi
+                vestibulum, eu feugiat eros suscipit. Phasellus in turpis vitae eros
+                viverra ullamcorper id finibus neque. Pellentesque lacus odio, pulvinar a
+                neque a, dictum tristique tellus. Vestibulum efficitur sagittis neque
+                vel tristique. Morbi vitae nunc leo. Curabitur lacinia id diam et
+                dignissim
+              </div>
+              
+              <div class="tab-pane" id="tab-review">
+                <form class="" id="form-review">
+                  <div id="review">
+                    <li>hello</li>
+                  </div>
+                  <h2 class="co-heading">Write a review</h2>
+                  <div class="form-group required row">
+                    <div class="col-sm-12">
+                      <label class="control-label" for="input-name">Your Name</label>
+                      <input type="text" name="name" value="" id="input-name" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group required row">
+                    <div class="col-sm-12">
+                      <label class="control-label" for="input-review">Your Review</label>
+                      <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+                      <!-- <div class="help-block"><span class="text-danger">Note:</span> HTML is not translated!</div> -->
+                    </div>
+                  </div>
+                  <div class="form-group required">
+
+                    <div class="radi">
+                      <label class="control-label" for="input-review">Rating</label>
+                      <div class="form-rating">
+
+                        <div class="form-rating-container pull-left">
+                          <input id="rating-5" type="radio" name="rating" value="5">
+                          <label class="fa fa-stack pull-right" for="rating-5">
+                            <i class="fa fa-star fa-stack-1x"></i>
+                            <i class="fa fa-star-o fa-stack-1x"></i>
+                          </label>
+                          <input id="rating-4" type="radio" name="rating" value="4">
+                          <label class="fa fa-stack pull-right" for="rating-4">
+                            <i class="fa fa-star fa-stack-1x"></i>
+                            <i class="fa fa-star-o fa-stack-1x"></i>
+                          </label>
+                          <input id="rating-3" type="radio" name="rating" value="3">
+                          <label class="fa fa-stack pull-right" for="rating-3">
+                            <i class="fa fa-star fa-stack-1x"></i>
+                            <i class="fa fa-star-o fa-stack-1x"></i>
+                          </label>
+                          <input id="rating-2" type="radio" name="rating" value="2">
+                          <label class="fa fa-stack pull-right" for="rating-2">
+                            <i class="fa fa-star fa-stack-1x"></i>
+                            <i class="fa fa-star-o fa-stack-1x"></i>
+                          </label>
+                          <input id="rating-1" type="radio" name="rating" value="1">
+                          <label class="fa fa-stack pull-right" for="rating-1">
+                            <i class="fa fa-star fa-stack-1x"></i>
+                            <i class="fa fa-star-o fa-stack-1x"></i>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="buttons clearfix">
+                    <div class="pull-right">
+                      <button type="button" id="button-review" data-loading-text="Loading..."
+                        class="btn btn-primary">Continue</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- relatedproduct -->
+          <div class="relpro">
+            <div class="heading text-center">
+              <h1><span>Related Products</span></h1>
+            </div>
+            <div class="row xspspace rless">
+              <div id="related" class="owl-carousel owl-theme">
+                <div class="col-xs-12 col-sm-12 product-layout col-xs-12 cless">
+                  <div class="product-thumb transition">
+                    <div class="image"><a href="index.php-46.html?route=product/product&amp;product_id=40"><img
+                          src="{% static 'image/cache/catalog/product/26-315x315.jpg' %}" alt="Nunc commodo euismod est et sagittis"
+                          title="Nunc commodo euismod est et sagittis" class="img-responsive center-block"></a>
+                      <!-- -->
+
+
+                    </div>
+                    <div class="caption">
+                      <!--          <div class="rating">          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span></div> -->
+                      <h4 class="protitle"><a href="index.php-46.html?route=product/product&amp;product_id=40">Nunc
+                          commodo euismod est et sagittis</a></h4>
+                      <div class="price">$123.20 </div>
+
+                      <div class="button-group">
+                        <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('40');"><svg>
+                            <use xlink:href="#pcart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List"
+                          onclick="wishlist.add('40');"><svg>
+                            <use xlink:href="#heart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product"
+                          onclick="compare.add('40');"><svg>
+                            <use xlink:href="#compare"></use>
+                          </svg></button>
+                        <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                <!-- -->
+                <div class="col-xs-12 col-sm-12 product-layout col-xs-12 cless">
+                  <div class="product-thumb transition">
+                    <div class="image"><a href="index.php-45.html?route=product/product&amp;product_id=41"><img
+                          src="{% static 'image/cache/catalog/product/11-315x315.jpg' %}"
+                          alt="Nunc tincidunt turpis eget malesuada accumsan"
+                          title="Nunc tincidunt turpis eget malesuada accumsan" class="img-responsive center-block"></a>
+                      <!-- -->
+
+
+                    </div>
+                    <div class="caption">
+                      <!--          <div class="rating">          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span></div> -->
+                      <h4 class="protitle"><a href="index.php-45.html?route=product/product&amp;product_id=41">Nunc
+                          tincidunt turpis eget malesuada accumsan</a></h4>
+                      <div class="price">$122.00 </div>
+
+                      <div class="button-group">
+                        <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('41');"><svg>
+                            <use xlink:href="#pcart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List"
+                          onclick="wishlist.add('41');"><svg>
+                            <use xlink:href="#heart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product"
+                          onclick="compare.add('41');"><svg>
+                            <use xlink:href="#compare"></use>
+                          </svg></button>
+                        <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                <!-- -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

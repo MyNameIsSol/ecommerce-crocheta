@@ -1,0 +1,806 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <div id="common-home" class="container-fluid">
+    <div class="row">
+      <div id="content" class="col-xs-12">
+        <div class="homeslider-container s-panel row">
+          <div class="loader wrloader"></div>
+          <div id="slideshow0" class="slideshow">
+            <div> <a href="{% url 'store' %}"><img src="{% static 'image/cache/catalog/slider/slider-1-1920x800.jpg' %}" alt="MacBookAir"
+                  class="img-responsive center-block"></a>
+              <div class="slidertext">
+                <div class="slideff">
+                  <h2>latest collection</h2>
+                  <h1>New T-Shirt</h1>
+                  <p>Lorem ipsum dolor sit amet conse the ctetur adipisicing elit, sed do eiusmod <br>
+                    tempor the incididunt ut labore magna aliqua Ut enim ad minim<br>
+                    veniam, quis nostrud or exercitation ullamco...</p>
+
+                  <a href="{% url 'store' %}" class="btn btn-primary">Shop now</a>
+                </div>
+              </div>
+            </div>
+            <div> <a href="{% url 'store' %}"><img src="{% static 'image/cache/catalog/slider/slider-2-1920x800.jpg' %}" alt="iPhone 6"
+                  class="img-responsive center-block"></a>
+              <div class="slidertext">
+                <div class="slideff">
+                  <h2>latest collection</h2>
+                  <h1>New T-Shirt</h1>
+                  <p>Lorem ipsum dolor sit amet conse the ctetur adipisicing elit, sed do eiusmod <br>
+                    tempor the incididunt ut labore magna aliqua Ut enim ad minim<br>
+                    veniam, quis nostrud or exercitation ullamco...</p>
+
+                  <a href="{% url 'store' %}" class="btn btn-primary">Shop now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+          $('.slideshow').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            arrows: true,
+            dots: true,
+            autoplaySpeed: 5000,
+          });
+        </script>
+        <div class="offrow">
+          <div class="container">
+
+            <div class="offerbanner">
+              <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 offbeffect"> <a href="#">
+                  <img src="{% static 'image/cache/catalog/Offerbanner/1-660x700.jpg' %}" alt="banner" class="img-responsive">
+                </a> </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 ser-dsc">
+                <span class="ser-title">
+                  <h2>Summer collection</h2>
+                  <h1>New Look Collection</h1>
+                  <p>Ne sed vero libris, his vivendo referrentur an. Torquatos voluptatum sit
+                    ad. Legendos dignissim eu mea, sea ei doming inimicus adolescens.
+                    Stet iusto deserunt sed in, ex quo quot invidunt.</p>
+                </span>
+                <a href="{% url 'store' %}" class="btn btn-primary">Shop now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content container protabcont">
+          <div class="tab-head text-center">
+            <div class="heading text-center">
+              <h1><span>popular product</span></h1>
+            </div>
+            <ul class="nav nav-tabs pro-tab">
+              <li class="active"><a href="#latestp" data-toggle="tab">latest</a></li>
+              <li><a href="#bestseller" data-toggle="tab">special</a></li>
+              <li ><a href="#featurep" data-toggle="tab">featured</a></li>
+            </ul>
+          </div>
+          
+          <div class="tab-pane active" id="latestp">
+            {% if latest_products %}
+            <div class="row rless">
+              <div id="latest" class="loadmr">
+
+                {% for product in latest_products %}
+                <div class="product-layout col-xs-6 col-sm-4 col-md-4 col-lg-4 cless">
+                  <div class="product-thumb transition">
+                    <div class="image">
+                      <a href="{{ product.get_url }}">
+                        <img src="{{ product.images.url }}" alt="{{ product.product_name }}"
+                          title="{{ product.product_name }}" class="img-responsive center-block"></a> 
+                        <!-- <a href="index.php-41.html?route=product/product&amp;product_id=43">
+                          <img src="{% static 'image/cache/catalog/product/20-430x430.jpg' %}" class="img-responsive second-img"
+                          alt="hover image"></a>  -->
+                      </div>
+
+                    <div class="caption">
+                      <h4 class="protitle"><a href=" {{ product.get_url }}">
+                        {{ product.product_name }}</a>
+                      </h4>
+                      <div class="price">NGN {{ product.price }} </div>
+
+                      <div class="button-group">
+                        <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('43');"><svg>
+                            <use xlink:href="#pcart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List"
+                          onclick="wishlist.add('43');"><svg>
+                            <use xlink:href="#heart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product"
+                          onclick="compare.add('43');"><svg>
+                            <use xlink:href="#compare"></use>
+                          </svg></button>
+                        <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+        
+              </div>
+            </div>
+            {% else %}
+            <div class="row rless">
+              <div id="latest" class="loadmr">
+                <div class="product-layout col-xs-12 col-sm-12 col-md-12 col-lg-12 cless">
+                  <h4 class="protitle text-center">
+                    Coming Soon....
+                  </h4>
+                </div>
+        
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="tab-pane" id="bestseller">
+            {% if special_products %}
+            <div class="row rless">
+              <div id="best" class="loadmr">
+              {% for product in special_products %}
+                <div class="multi-row">
+                  <div class="product-layout col-xs-6 col-sm-4 col-md-4 col-lg-4 cless">
+                    <div class="product-thumb transition">
+                      <div class="image">
+                        <a href="{{ product.get_url }}">
+                          <img src="{{ product.images.url }}" alt="{{ product.product_name }}"
+                            title="{{ product.product_name }}" class="img-responsive center-block"></a> 
+                          <!-- <a href="index.php-41.html?route=product/product&amp;product_id=43">
+                            <img src="{% static 'image/cache/catalog/product/20-430x430.jpg' %}" class="img-responsive second-img"
+                            alt="hover image"></a>  -->
+                        </div>
+  
+                      <div class="caption">
+                        <h4 class="protitle"><a href="{{ product.get_url }}">
+                          {{ product.product_name }}</a>
+                        </h4>
+                        <div class="price">NGN {{ product.price }} </div>
+  
+                        <div class="button-group">
+                          <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('43');"><svg>
+                              <use xlink:href="#pcart"></use>
+                            </svg></button>
+                          <button type="button" data-toggle="tooltip" title="Add to Wish List"
+                            onclick="wishlist.add('43');"><svg>
+                              <use xlink:href="#heart"></use>
+                            </svg></button>
+                          <button type="button" data-toggle="tooltip" title="Compare this Product"
+                            onclick="compare.add('43');"><svg>
+                              <use xlink:href="#compare"></use>
+                            </svg></button>
+                          <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
+  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% else %}
+            <div class="row rless">
+              <div id="best" class="loadmr">
+
+                <div class="multi-row">
+                  <div class="product-layout col-xs-12 col-sm-12 col-md-12 col-lg-12 cless">
+                    <h4 class="protitle text-center">
+                      Coming Soon....
+                    </h4>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="tab-pane" id="featurep">
+            {% if featured_products %}
+            <div class="row rless">
+              <div id="feature" class="loadmr">
+                {% for product in featured_products %}
+                <div class="product-layout col-xs-6 col-sm-4 col-md-4 col-lg-4 cless">
+                  <div class="product-thumb transition">
+                    <div class="image">
+                      <a href="{{ product.get_url }}">
+                        <img src="{{ product.images.url }}" alt="{{ product.product_name }}"
+                          title="{{ product.product_name }}" class="img-responsive center-block"></a> 
+                        <!-- <a href="index.php-41.html?route=product/product&amp;product_id=43">
+                          <img src="{% static 'image/cache/catalog/product/20-430x430.jpg' %}" class="img-responsive second-img"
+                          alt="hover image"></a>  -->
+                      </div>
+
+                    <div class="caption">
+                      <h4 class="protitle"><a href="{{ product.get_url }}">
+                        {{ product.product_name }}</a>
+                      </h4>
+                      <div class="price">NGN {{ product.price }} </div>
+
+                      <div class="button-group">
+                        <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('43');"><svg>
+                            <use xlink:href="#pcart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List"
+                          onclick="wishlist.add('43');"><svg>
+                            <use xlink:href="#heart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product"
+                          onclick="compare.add('43');"><svg>
+                            <use xlink:href="#compare"></use>
+                          </svg></button>
+                        <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% else %}
+            <div class="row rless">
+              <div id="feature" class="loadmr">
+                  <div class="product-layout col-xs-12 col-sm-12 col-md-12 col-lg-12 cless">
+                    <h4 class="protitle text-center">
+                      Coming Soon....
+                    </h4>
+                  </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div>
+          <div class="row">
+            <div class="html-vid">
+              <div class="video-dec col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <h2>Fashion<br>
+                  Lookbook Video</h2>
+              </div>
+              <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 video-bg">
+                <span class="play-video" data-toggle="modal" data-target="#vedioModal">
+                  <svg width="40px" height="40px">
+                    <use xlink:href="#player"></use>
+                  </svg>
+
+                </span>
+              </div>
+              <div id="vedioModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <div class="modal-body"><iframe
+                        src="https://player.vimeo.com/video/100899265?color=afddd2&title=0&byline=0"
+                        webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen"
+                        allowfullscreen="allowfullscreen" width="100%" height="360" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+          (function ($) {
+            $("#testi").owlCarousel({
+              itemsCustom: [
+                [0, 1]
+              ],
+              autoPlay: false,
+              navigationText: ['<svg width="15px" height="15px"><use xlink:href="#arleft"></use></svg>', '<svg width="15px" height="15px"><use xlink:href="#arright">'],
+              navigation: false,
+              pagination: true
+            });
+          }(jQuery));
+
+        </script>
+        <div class="container">
+          <div class="category_bag">
+            <div class="homecategory row">
+              <h1 class="heading text-center"><span>Our category</span></h1>
+              <div id="cat-img" class="owl-carousel owl-theme">
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php.html?route=product/category&amp;path=79"> <img
+                        src="{% static 'image/cache/catalog/category/1-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor">fashion</span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php-1.html?route=product/category&amp;path=20"> <img
+                        src="{% static 'image/cache/catalog/category/7-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor"> Women</span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php-8.html?route=product/category&amp;path=81"> <img
+                        src="{% static 'image/cache/catalog/category/3-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor">kides</span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php-9.html?route=product/category&amp;path=18"> <img
+                        src="{% static 'image/cache/catalog/category/5-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor">men</span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php-16.html?route=product/category&amp;path=25"> <img
+                        src="{% static 'image/cache/catalog/category/8-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor">jeans</span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php-29.html?route=product/category&amp;path=17"> <img
+                        src="{% static 'image/cache/catalog/category/6-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor">T-Shirts</span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php-30.html?route=product/category&amp;path=24"> <img
+                        src="{% static 'image/cache/catalog/category/3-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor">Clothes</span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php-31.html?route=product/category&amp;path=33"> <img
+                        src="{% static 'image/cache/catalog/category/4-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor">Sports </span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="block-cat-wr  cless">
+                  <div class="categorybr">
+                    <a href="index.php-32.html?route=product/category&amp;path=80"> <img
+                        src="{% static 'image/cache/catalog/category/1-315x380.jpg' %}" class="img-responsive center-block" alt="">
+                      <div class="catcontent">
+                        <div class="categorydec">
+                          <h2><span class="categorybor">dresses</span></h2>
+                          <h4>shop now<!-- <svg width="12px" height="12px"><use xlink:href="#catarrow"></use></svg> -->
+                          </h4>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $("#cat-img").owlCarousel({
+              itemsCustom: [
+                [0, 1],
+                [320, 1],
+                [576, 2],
+                [600, 2],
+                [768, 3],
+                [992, 3],
+                [1200, 4],
+                [1410, 4]
+              ],
+              // autoPlay: 6000,
+              navigationText: ['<svg width="15px" height="15px"><use xlink:href="#larrow"></use></svg><span>prev</span>', '<span>next</span><svg width="15px" height="15px"><use xlink:href="#rarrow">'],
+              navigation: false,
+              pagination: false
+            });
+          });
+        </script>
+        <div>
+          <div class="container">
+            <div class="row parallex text-xs-center">
+              <div id="testi" class="owl-carousel owl-theme">
+                <div class="item">
+                  <h2>mr. John doe</h2>
+                  <h3>designer</h3>
+                  <span></span>
+                  <p>Vestibulum at dui et massa euismod lacinia vel eu nisi. Donec a massa sit amet neque rutrum
+                    faucibus ut vitae augue. Pellentesque sodales velit id rutrum elementum. Mauris quis metus non felis
+                    pellentesque consequat eget vel sem. Vestibulum interdum in urna ac rhoncus. Sed id dui enim Nulla
+                    nulla velit, molestie nec fermentum in, venenatis eget mi Fusce congue dapibus.</p>
+                </div>
+                <div class="item">
+                  <h2>mr. molestie nunc</h2>
+                  <h3>developer</h3>
+                  <span></span>
+                  <p>Pellentesque consequat erat id sapien commodo porttitor. Fusce congue dapibus libero at ultricies.
+                    Nulla nulla velit, molestie nec fermentum in, venenatis eget mi. Phasellus metus tortor, fringilla
+                    id eleifend id, rutrum eu erat. In hac habitasse platea dictumst. Fusce pulvinar luctus urna in
+                    porta molestie nec fermentum in, venenatis eget mi Fusce congue dapibus.</p>
+
+
+                </div>
+                <div class="item">
+                  <h2>mr. mauris ultricie</h2>
+                  <h3>designer</h3>
+                  <span></span>
+                  <p>Fusce ut accumsan dui, ut condimentum orci. Mauris suscipit pulvinar justo fermentum tempus.
+                    Vestibulum aliquam turpis nunc, a mattis diam convallis vel. Vestibulum ante ipsum primis in
+                    faucibus orci luctus et ultrices posuere cubilia Curae, Pellentesque tempus nibh euismod, gravida
+                    dolor efficitur molestie nec fermentum in, venenatis eget mi Fusce congue eget dapibus.</p>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+          (function ($) {
+            $("#testi").owlCarousel({
+              itemsCustom: [
+                [0, 1]
+              ],
+              autoPlay: false,
+              navigationText: ['<svg width="15px" height="15px"><use xlink:href="#arleft"></use></svg>', '<svg width="15px" height="15px"><use xlink:href="#arright">'],
+              navigation: false,
+              pagination: true
+            });
+          }(jQuery));
+
+        </script>
+        <div class="container spepro">
+          <div class="heading text-center">
+            <h1><span>Special product</span></h1>
+          </div>
+          <div class="row rless">
+            <div id="special" class="owl-theme owl-carousel cbp">
+              <div class="multi-row">
+                <div class="product-layout col-xs-12 cless">
+                  <div class="product-thumb transition">
+                    <div class="image"><a href="index.php-54.html?route=product/product&amp;product_id=29"><img
+                          src="{% static 'image/cache/catalog/product/16-315x315.jpg' %}" alt="pretium neque ut euismod fringilla"
+                          title="pretium neque ut euismod fringilla" class="img-responsive center-block"></a> <a
+                        href="index.php-54.html?route=product/product&amp;product_id=29"><img
+                          src="{% static 'image/cache/catalog/product/15-315x315.jpg' %}" class="img-responsive second-img"
+                          alt="hover image"></a> <span class="sale">68%</span> </div>
+
+                    <div class="caption">
+                     <!-- Rating star was removed -->
+                      <h4 class="protitle"><a href="index.php-54.html?route=product/product&amp;product_id=29">pretium
+                          neque ut euismod fringilla</a></h4>
+                      <div class="price"> <span class="price-new">$110.00</span> <span class="price-old">$337.99</span>
+                      </div>
+
+                      <div class="button-group">
+                        <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('29');"><svg>
+                            <use xlink:href="#pcart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List"
+                          onclick="wishlist.add('29');"><svg>
+                            <use xlink:href="#heart"></use>
+                          </svg></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product"
+                          onclick="compare.add('29');"><svg>
+                            <use xlink:href="#compare"></use>
+                          </svg></button>
+                        <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $("#special").owlCarousel({
+              itemsCustom: [
+                [0, 2],
+                [400, 2],
+                [600, 2],
+                [768, 3],
+                [1200, 4],
+                [1410, 4],
+                [1600, 4]
+              ],
+              // autoPlay: 1000,
+              navigationText: ['<svg width="15px" height="15px"><use xlink:href="#arleft"></use></svg>', '<svg width="15px" height="15px"><use xlink:href="#arright">'],
+              navigation: true,
+              pagination: false
+            });
+          });
+        </script>
+        <div class="blog_webi container">
+          <div class="heading text-center">
+            <h1><span>Latest Blog</span></h1>
+          </div>
+          <div class="box-content">
+            <div class="box-product row rless">
+              <div id="blog" class="owl-carousel owl-theme">
+                <div class="product-block col-xs-12 cless">
+                  <div class="blogshadow">
+                    <div class="blog-left">
+                      <div class="webi-blog-image">
+                        <img src="{% static 'image/cache/catalog/blog/1-1170x648.jpg' %}" alt="Latest Blog" title="Latest Blog"
+                          class="img-responsive">
+                        <div class="blog-post-image-hover"> </div>
+                        <div class="webi_post_hover">
+                          <div class="blog-ic">
+                            <a class="icon zoom" title="Click to view Full Image "
+                              href="{% static 'image/cache/catalog/blog/1-1170x648.jpg' %}" data-lightbox="example-set"><i
+                                class="fa fa-search"></i></a>
+                           
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="date-time blogdt"><span class="blogmo">01</span><span class="blogda">Jun</span>
+                    </div>
+                    <!-- Romoved text and botton displaying on the image -->
+                    
+                  </div>
+                </div>
+                <div class="product-block col-xs-12 cless">
+                  <div class="blogshadow">
+                    <div class="blog-left">
+                      <div class="webi-blog-image">
+                        <img src="{% static 'image/cache/catalog/blog/2-1170x648.jpg' %}" alt="Latest Blog" title="Latest Blog"
+                          class="img-responsive">
+                        <div class="blog-post-image-hover"> </div>
+                        <div class="webi_post_hover">
+                          <div class="blog-ic">
+                            <a class="icon zoom" title="Click to view Full Image "
+                              href="{% static 'image/cache/catalog/blog/2-1170x648.jpg' %}" data-lightbox="example-set"><i
+                                class="fa fa-search"></i></a>
+                           
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="date-time blogdt"><span class="blogmo">01</span><span class="blogda">Jun</span>
+                    </div>
+                    <!-- Romoved text and botton displaying on the image -->
+                  </div>
+                </div>
+                <div class="product-block col-xs-12 cless">
+                  <div class="blogshadow">
+                    <div class="blog-left">
+                      <div class="webi-blog-image">
+                        <img src="{% static 'image/cache/catalog/blog/3-1170x648.jpg' %}" alt="Latest Blog" title="Latest Blog"
+                          class="img-responsive">
+                        <div class="blog-post-image-hover"> </div>
+                        <div class="webi_post_hover">
+                          <div class="blog-ic">
+                            <a class="icon zoom" title="Click to view Full Image "
+                              href="{% static 'image/cache/catalog/blog/3-1170x648.jpg' %}" data-lightbox="example-set"><i
+                                class="fa fa-search"></i></a>
+                          
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="date-time blogdt"><span class="blogmo">01</span><span class="blogda">Jun</span>
+                    </div>
+                    <!-- Romoved text and botton displaying on the image -->
+                  </div>
+                </div>
+                <div class="product-block col-xs-12 cless">
+                  <div class="blogshadow">
+                    <div class="blog-left">
+                      <div class="webi-blog-image">
+                        <img src="{% static 'image/cache/catalog/blog/5-1170x648.jpg' %}" alt="Latest Blog" title="Latest Blog"
+                          class="img-responsive">
+                        <div class="blog-post-image-hover"> </div>
+                        <div class="webi_post_hover">
+                          <div class="blog-ic">
+                            <a class="icon zoom" title="Click to view Full Image "
+                              href="{% static 'image/cache/catalog/blog/5-1170x648.jpg' %}" data-lightbox="example-set"><i
+                                class="fa fa-search"></i></a>
+                           
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="date-time blogdt"><span class="blogmo">01</span><span class="blogda">Jun</span>
+                    </div>
+                   <!-- Romoved text and botton displaying on the image -->
+                  </div>
+                </div>
+                <div class="product-block col-xs-12 cless">
+                  <div class="blogshadow">
+                    <div class="blog-left">
+                      <div class="webi-blog-image">
+                        <img src="{% static 'image/cache/catalog/blog/6-1170x648.jpg' %}" alt="Latest Blog" title="Latest Blog"
+                          class="img-responsive">
+                        <div class="blog-post-image-hover"> </div>
+                        <div class="webi_post_hover">
+                          <div class="blog-ic">
+                            <a class="icon zoom" title="Click to view Full Image "
+                              href="{% static 'image/cache/catalog/blog/6-1170x648.jpg' %}" data-lightbox="example-set"><i
+                                class="fa fa-search"></i></a>
+                          
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="date-time blogdt"><span class="blogmo">01</span><span class="blogda">Jun</span>
+                    </div>
+                    <!-- Romoved text and botton displaying on the image -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  <div class="buttons-see-all text-center">
+            <button type="button" onclick="location='https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=information/blogger/blogs';" class="btn btn-primary">See all Blogs</button>
+        </div> -->
+        </div>
+
+
+        <script type="text/javascript">
+          (function ($) {
+            $("#blog").owlCarousel({
+              itemsCustom: [
+                [0, 1],
+                [600, 1],
+                [768, 2],
+                [992, 2],
+                [1200, 2],
+                [1410, 2]
+              ],
+              // autoPlay: 1000,
+              navigationText: ['<svg width="15px" height="15px"><use xlink:href="#arleft"></use></svg>', '<svg width="15px" height="15px"><use xlink:href="#arright">'],
+              navigation: true,
+              pagination: false
+            });
+          }(jQuery));
+        </script>
+        <div class="container">
+          <div class="logo-slider">
+            <div id="carousel0" class="owl-carousel owl-theme">
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-8-225x150.png' %}" alt="Harley Davidson"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-7-225x150.png' %}" alt="Nintendo"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-6-225x150.png' %}" alt="Disney"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-5-225x150.png' %}" alt="NFL"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-4-225x150.png' %}" alt="Burger King"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-3-225x150.png' %}" alt="Sony"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-2-225x150.png' %}" alt="RedBull"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-12-225x150.png' %}" alt="Canon"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-11-225x150.png' %}" alt="Dell"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-10-225x150.png' %}" alt="Starbucks"
+                    class="img-responsive center-block"></a></div>
+              <div class="text-center col-xs-12 cless"><a href="#"><img
+                    src="{% static 'image/cache/catalog/brands/menufacture-1-225x150.png' %}" alt="Coca Cola"
+                    class="img-responsive center-block"></a></div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          (function ($) {
+            $("#carousel0").owlCarousel({
+              itemsCustom: [
+                [0, 2],
+                [320, 2],
+                [450, 3],
+                [600, 4],
+                [700, 5],
+                [768, 5],
+                [992, 5],
+                [1200, 6],
+                [1410, 6]
+              ],
+              autoPlay: 6000,
+              loop: true,
+              navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+              navigation: false,
+              pagination: false
+            });
+          }(jQuery));
+        </script>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+
+

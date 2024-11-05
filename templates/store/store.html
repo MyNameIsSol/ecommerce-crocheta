@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="breadbg">
+    <div class="container">
+      <div class="row">
+        <ul class="breadcrumb">
+          <li><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>
+          <li><a href="{% url 'store' %}"> Store</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="product-category" class="container cleft">
+    <div class="row">
+      <aside id="column-left" class="col-sm-4 col-md-3 col-xs-12 hidden-xs">
+        
+        <div class="list-group catlistpage hidden-xs">
+          <div class="panel-heading cathed">category</div> 
+          <a href="{% url 'store' %}"
+            class="list-group-item">All Products</a>
+            {% for category in links %}
+          <a href="{{ category.get_url }}"
+            class="list-group-item">{{ category.category_name }}</a>
+            {% endfor %}
+         
+        </div>
+
+        <div class="panel panel-default catfilter">
+          <div class="panel-heading">Refine Search<button type="button" class="btn toggle collapsed"
+              data-toggle="collapse" data-target="#xsfilter"></button></div>
+          <div id="xsfilter" class="collapse">
+            <div class="list-group"> <a class="list-group-item act">Color</a>
+              <div class="list-group-item">
+                <div id="filter-group1">
+                  <div class="checkbox">
+                    <label> <input type="checkbox" name="filter[]" value="1">Blue (4)</label>
+                  </div>
+                  <div class="checkbox">
+                    <label> <input type="checkbox" name="filter[]" value="2">Green (2)</label>
+                  </div>
+                </div>
+              </div> <a class="list-group-item act">Size</a>
+              <div class="list-group-item">
+                <div id="filter-group2">
+                  <div class="checkbox">
+                    <label> <input type="checkbox" name="filter[]" value="4">Small (4)</label>
+                  </div>
+                  <div class="checkbox">
+                    <label> <input type="checkbox" name="filter[]" value="5">Medium (5)</label>
+                  </div>
+                  <div class="checkbox">
+                    <label> <input type="checkbox" name="filter[]" value="6">Large (3)</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer text-right">
+              <button type="button" id="button-filter" class="btn btn-primary">Refine Search</button>
+            </div>
+          </div>
+        </div>
+  
+      </aside>
+      <div id="content" class="col-sm-8 col-md-9  col-xs-12 colright">
+        {% if category_detail %}
+        <div class="cate-top row hidden-xs">
+          <h2>{{ category_detail.category_name }}</h2>
+          <div class="row">
+            <div class="col-md-5 col-lg-3 hidden-sm"> <img src="{{ category_detail.category_image.url }}" alt=" {{ category.category_name }}"
+                title=" {{ category.category_name }}" class="img-responsive center-block"> </div>
+            <div class="col-md-7 col-sm-12 col-lg-9 col-xs-12">{{ category_detail.description }}</div>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="appres"></div>
+        <div class="refines">
+          <h3>Refine Search</h3>
+          <ul class="list-unstyled list-inline">
+
+            {% if category_detail %}
+            <li><a href="#">{{ category_detail.category_name }} Found ({{product_count}})</a></li>
+            {% else %}
+            <li><a href="#">Searched Items ({{product_count}})</a></li>
+            {% endif %}
+
+            <li><a href="index.php-5.html?route=product/category&amp;path=20_27">Women Footwear (4)</a></li>
+          </ul>
+        </div>
+        <div class="row cate-border">
+          <div class="col-md-2 col-sm-3 col-xs-4 lgrid">
+            <div class="btn-group-sm">
+              <button type="button" id="list-view" class="btn listgridbtn" data-toggle="tooltip" title="List">
+                <svg width="20px" height="20px">
+                  <use xlink:href="#clist"></use>
+                </svg>
+              </button>
+              <button type="button" id="grid-view" class="btn listgridbtn" data-toggle="tooltip" title="Grid">
+                <svg width="18px" height="18px">
+                  <use xlink:href="#cgrid"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-6 col-xs-8 hidden-md hidden-sm ct">
+            <a href="index.php-40.html?route=product/compare" id="compare-total" class="btn btn-link">Product Compare
+              (0)</a>
+          </div>
+          <div class="col-lg-3 col-md-5 col-xs-4 col-sm-5 catesort">
+            <div class="input-group input-group-sm select-input">
+              <label class="input-group-addon" for="input-sort">Sort By:</label>
+
+              <select id="input-sort" class="form-control" onchange="location = this.value;">
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=p.sort_order&amp;order=ASC"
+                  selected="selected">Default</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=pd.name&amp;order=ASC">
+                  Name (A - Z)</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=pd.name&amp;order=DESC">
+                  Name (Z - A)</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=p.price&amp;order=ASC">
+                  Price (Low &gt; High)</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=p.price&amp;order=DESC">
+                  Price (High &gt; Low)</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=rating&amp;order=DESC">
+                  Rating (Highest)</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=rating&amp;order=ASC">
+                  Rating (Lowest)</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=p.model&amp;order=ASC">
+                  Model (A - Z)</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;sort=p.model&amp;order=DESC">
+                  Model (Z - A)</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-5 col-xs-4 col-sm-4 catesort">
+            <div class="input-group input-group-sm select-input">
+              <label class="input-group-addon" for="input-limit">Show:</label>
+              <select id="input-limit" class="form-control" onchange="location = this.value;">
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;limit=15"
+                  selected="selected">15</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;limit=25">
+                  25</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;limit=50">
+                  50</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;limit=75">
+                  75</option>
+                <option
+                  value="https://opencart.dostguru.com/FS01/fashpad_01/index.php?route=product/category&amp;path=20&amp;limit=100">
+                  100</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row cpagerow">
+      {% for product in products %}
+          <div class="product-layout product-list col-xs-12">
+            <div class="product-thumb transition">
+              <div class="image"><a href="{{ product.get_url }}"><img
+                    src="{{ product.images.url }}" alt="{{ product.product_name }}"
+                    title="{{ product.product_name }}" class="img-responsive center-block"></a> 
+                    <!-- <a
+                  href="index.php-74.html?route=product/product&amp;path=20&amp;product_id=33"><img
+                    src="{% static 'image/cache/catalog/product/7-315x315.jpg' %}" class="img-responsive second-img"
+                    alt="hover image"></a> -->
+                    <!-- <span class="sale">68%</span> -->
+              </div>
+
+              <div class="caption">
+                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span
+                    class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
+                      class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
+                      class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i
+                      class="fa fa-star-o fa-stack-2x"></i></span></div>
+                <h4 class="protitle"><a
+                    href="{{ product.get_url }}">{{ product.product_name }}</a></h4>
+                <p class="catlist-des">{{ product.description }}</p>
+                <div class="price">${{ product.price }} </div> 
+
+                <div class="button-group">
+                  <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('33');"><svg>
+                      <use xlink:href="#pcart"></use>
+                    </svg></button>
+                  <button type="button" data-toggle="tooltip" title="Add to Wish List"
+                    onclick="wishlist.add('33');"><svg>
+                      <use xlink:href="#heart"></use>
+                    </svg></button>
+                  <button type="button" data-toggle="tooltip" title="Compare this Product"
+                    onclick="compare.add('33');"><svg>
+                      <use xlink:href="#compare"></use>
+                    </svg></button>
+                  <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+     
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
