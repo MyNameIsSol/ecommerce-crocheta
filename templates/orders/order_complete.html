@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .well{
+      border: 0;
+      box-shadow: 0px 0 3px 2px rgba(0,0,0,.05);
+      margin: 0 auto !important;
+    }
+    .logo-receipt{
+        margin-top: 30px;
+    }
+  </style>
+  <div class="breadbg">
+    <div class="container">
+      <div class="row">
+        <ul class="breadcrumb">    
+          <li><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>    
+          <li><a href="{% url 'payments' %}">Payment</a></li>    
+          <li><a href="#">Confirmation</a></li>    </ul>
+    </div>
+  </div>
+  </div>
+  <div id="account-login" class="container acpage">
+      <div class="row">
+  
+          <div id="content" class=" col-xs-12 col-sm-12 col-md-10 col-lg-8 col-xl-8" style="margin: 0 auto !important;">
+            
+              <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                   
+                      <div class="well pt-5">
+                        <h1 style="border-bottom: 0; margin-bottom: 0; line-height: 10px;">
+                            <center><i class="fa fa-check-circle" style="font-size: 72px;margin-bottom: 20px;color: #28A745; margin-top: 30px;"></i></center>
+                            <h2 style="text-align: center; font-size: 18px; margin-top: 10px;">Payment Successful</h2>
+                        </h1>
+                          <h1 style="line-height: 50px; border-bottom: 0; display: flex !important; justify-content: space-between;"><img src="{% static 'image/catalog/crocheta-logo-new.png' %}" alt="" style="max-width: 60px;"> <a href="#" id="saveAsPdf" class="fa fa-print" style="font-size: 20px; color: red;"></a></h1>
+
+                          <div class="personal-one" style="display: flex; justify-content: space-between; text-align: start; margin-bottom: 60px;">
+                            <div class="name"  style="word-break: break-word;">
+                                <p ><strong style="font-size: 18px; line-height: 40px; letter-spacing: 0.8px;">{{ order.full_name }}</strong></p>
+                                <p style="margin-bottom: 2px !important">Order Date: <b style="font-weight: 700;">{{ order.created_at }}</b></p>
+                                <p style="margin-bottom: 2px !important">Order Number: <b style="font-weight: 700;">{{ order.order_number }}</b></p>
+                                <p style="margin-bottom: 2px !important">Status: <b style="font-weight: 700;">{{ payment.status }}</b></p>
+                            </div>
+                            <div class="email" style="word-break: break-word; text-align: right;">
+                                <p style="margin-bottom: 2px !important;">{{order.full_address}}</p>
+                                <p style="margin-bottom: 2px !important">{{order.city}} {{order.state}}, {{order.postcode}}</p>
+                                <p style="margin-bottom: 2px !important">{{order.country}}</p>
+                                <p style="margin-bottom: 2px !important">{{ order.email }}</p>
+                            </div>
+                        </div>
+                     
+                        <div class="table-responsive" style="border: 0;">
+                            <table class="table table-borderless">
+                                <thead class="text-muted">
+                                    <tr class="small text-uppercase">
+                                      <th>Product</th>
+                                      <th>Quantity</th>
+                                      <th>Price</th>
+                                    </tr>
+                                    </thead>
+                              <tbody>
+                                {% for item in ordered_products %}
+                                <tr>
+                                   <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal;">
+                                   <p class="ms-3 product-name " style="font-size:14px; line-height: 15px">{{ item.product.product_name }}</p>
+                                   {% if item.variations.all %}
+                                     {% for i in item.variations.all %}
+                                     <p class="text-muted small" style="line-height: 8px">{{ i.variation_category | capfirst }} : {{ i.variation_value | capfirst }}</p>
+                                     {% endfor %}
+                                   {% endif %}
+                                   </td>
+           
+                                  <td class="text-start" style="white-space: nowrap;">{{ item.quantity }}
+                                  </td>
+              
+                                  <td class="text-start  price">
+                                   <p class="fw-bold" style="margin-bottom: 2px; text-align: start;">${{ item.product_price }}</p>
+                                   <!-- <span style="font-size: 12px;color: gray;">${{ cart_item.product.price }} each</span> -->
+                                </td>
+                                </tr>
+                                {% endfor %}
+                                <!-- Repeat <tr> for each product in the cart -->
+                                    
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                    <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal;">
+                                    
+                                    </td>
+            
+                                <td class="text-start" style="white-space: nowrap;">Sub Total:
+                                </td>
+            
+                                <td class="text-start  price">
+                                    <p class="fw-bold" style="margin-bottom: 2px; text-align: start;">${{ subtotal }}</p>
+                                    <!-- <span style="font-size: 12px;color: gray;">${{ cart_item.product.price }} each</span> -->
+                                </td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>  
+                          
+                          <div class="table-responsive" style="border: 0; margin-top: 50px; margin-bottom: 30px;">
+                            <table class="table table-borderless">
+                                <thead class="text-muted">
+                                    <tr class="small text-uppercase">
+                                      <th>Transaction ID</th>
+                                      <th>Shipping Fee</th>
+                                      <th>Tax</th>
+                                      <th>Grand Total</th>
+                                    </tr>
+                                    </thead>
+                              <tbody>
+                                <tr>
+                                   <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal; border-bottom: 2px solid #ddd;padding: 20px 0;">
+                                    #{{ transID }}
+                                   </td>
+           
+                                  <td class="text-start" style="white-space: nowrap; border-bottom: 2px solid #ddd; padding: 20px 0;">${{ order.shipping_method.price }}
+                                  </td>
+              
+                                  <td class="text-start" style="white-space: nowrap; border-bottom: 2px solid #ddd; padding: 20px 0;">${{order.tax}}
+                                </td>
+                                <td class="text-start" style="white-space: nowrap; border-bottom: 2px solid #ddd; padding: 20px 0;"><b style="font-weight: 900; margin: 0; padding: 0; font-size: 14px; color: #FF69B4;">${{order.order_total}}</b>
+                                </td>
+                                </tr>
+                                <!-- Repeat <tr> for each product in the cart -->
+                              </tbody>
+                            </table>
+                          </div>  
+
+                          <p style="display: flex; align-items: center; margin-left: 5px; margin-bottom: 40px;">
+                            <span class="fa fa-heart" style="margin-right: 8px; color: #FF69B4;">
+                            </span>
+                            <span style="font-size: 14px;">Thank You!</span>
+                        </p>
+                    </div>
+
+
+                  </div>
+                  
+              </div>
+          </div>
+  
+      </div>
+  </div>
+  <script>
+    document.getElementById('saveAsPdf').addEventListener('click', () => {
+        const element = document.getElementById('content');
+        const options = {
+            margin: 10,
+            filename: 'Receipt.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Generate the PDF
+        html2pdf().set(options).from(element).save();
+    });
+</script>
+{% endblock %}

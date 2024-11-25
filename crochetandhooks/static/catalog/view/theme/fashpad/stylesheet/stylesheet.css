@@ -2835,7 +2835,7 @@ transition: 0.5s ease;
 .btn.pcrt.btn-primary {
     min-height: 35px;
 }
-#product-product .pro-content .alert,#account-register .alert,{
+#product-product .pro-content .alert,#account-register .alert{
 	position: unset;
 }
 .zoomWrapper{

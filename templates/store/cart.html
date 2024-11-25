@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    .product-image {
+     width: 60px;
+     height: auto;
+   }
+   
+   .quantity-input {
+     max-width: 50px;
+   }
+   
+   .remove-icon svg {
+     fill: #ff6b6b;
+     transition: fill 0.2s ease;
+   }
+   
+   .remove-icon:hover svg {
+     fill: #ff4c4c;
+   }
+
+   td.text-wrap {
+      overflow-wrap: break-word;
+      word-break: break-word; /* Breaks any long unbroken text */
+    }
+    .text-decor{
+      min-width: 110px;
+    }
+      
+   /* #column-right{
+     position: fixed;
+     right: 15px;
+     top: 20px;
+   } */
+   
+   </style>
+   
+   <div class="breadbg">
+     <div class="container">
+       <div class="row">
+         <ul class="breadcrumb">    <li><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>    <li><a href="{% url 'store' %}">Store</a></li>    <li><a href="#">Cart</a></li>    </ul>
+     </div>
+   </div>
+   </div>
+
+   <div id="account-forgotten" class="container acpage">  
+    {% include 'includes/alerts.html' %}
+     <div class="row">    
+       <div id="content" class="col-sm-8 col-md-8 col-xs-12 col-lg-8 col-xl-8 ">
+   
+   
+        <div class="infobg">
+         <h1>Cart Items</h1>
+         <p>You have {{cart_items_count}} items in your shopping chart.</p>
+   
+   
+         <!-- <form action="#" method="post" > -->
+           {% if not cart_items %}
+           <tr>
+                <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal;">
+                  <h1>No Item Added To Your Cart</h1>
+                </td>
+            </tr>
+           {% else %}
+               <div class="table-responsive">
+                 <table class="table table-borderless">
+                   <tbody>
+                    {% for cart_item in cart_items %}
+                     <tr>
+                       <td class="d-flex align-items-center">
+                         <img src="{{ cart_item.product.images.url }}" alt="Product Image" class="img-fluid product-image">
+                        </td>
+                        <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal;">
+                        <a href="{{ cart_item.product.get_url }}"><span class="ms-3 product-name ">{{ cart_item.product.product_name }}</span> </a>
+                        {% if cart_item.variations.all %}
+                          {% for item in cart_item.variations.all %}
+                          <p class="text-muted small">{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }}</p>
+                          {% endfor %}
+                        {% endif %}
+                        </td>
+
+                       <td class="text-center" style="white-space: nowrap;">
+                         <div class="form-group  d-flex align-items-center justify-content-center flex-nowrap">
+                          <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" id="button-cart" class="btn btn-outline-secondary btn-sm increment" style="background: #e9e9ed;">-</a>
+                             <!-- <button type="button" id="button-cart" class=" btn btn-outline-secondary btn-sm decrement">-</button> -->
+   
+                             <input type="text" value="{{ cart_item.quantity }}" placeholder="1" class=" form-control-sm text-center  mx-2" style="width: 20px;">
+                          
+                             <form action="{% url 'add_cart' cart_item.product.id %}" method="POST" style="white-space: nowrap; width: 18px;">
+                              {% csrf_token %}
+                              {% for item in cart_item.variations.all %}
+                                <input type="hidden" name="{{ item.variation_category | lower }}" value="{{ item.variation_value | capfirst }}">
+                              {% endfor %}
+                                <!-- <a href="{% url 'add_cart' cart_item.product.id %}" id="button-cart" class="btn btn-outline-secondary btn-sm increment" style="background: #e9e9ed;">+</a> -->
+                                <button type="submit" id="button-cart" class="btn btn-outline-secondary btn-sm increment">+</button>
+                              </form>
+                            </div>
+                       </td>
+   
+                       <td class="text-center  price">
+                        <p class="fw-bold" style="margin-bottom: 2px;">${{ cart_item.sub_total }}</p>
+                        <span style="font-size: 12px;color: gray;">${{ cart_item.product.price }}</span></td>
+                       <td class="text-center">
+                        <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" id="button-cart" class="btn btn-sm remove-icon" onclick=" return confirm('Are ou sure you want to delete this item?')" style="background: #e9e9ed;">
+                          <svg width="20" height="20" fill="currentColor">
+                          <use xlink:href="#trash-icon"></use>
+                        </svg>
+                      </a>
+                         <!-- <button class="btn btn-sm remove-icon">
+                           <svg width="20" height="20" fill="currentColor">
+                             <use xlink:href="#trash-icon"></use>
+                           </svg>
+                         </button> -->
+                       </td>
+                     </tr>
+                     {% endfor %}
+                     <!-- Repeat <tr> for each product in the cart -->
+                   </tbody>
+                 </table>
+               </div>
+              {% endif %}
+           
+            <div class="buttons clearfix">
+                <div class="pull-left"><a href="" class="btn btn-primary">Back</a></div>
+                <div class="pull-right">
+                  <a href="{% url 'store' %}" class="btn btn-primary">Continue</a>
+                <!-- <input type="submit" value="Continue" class="btn btn-primary"> -->
+                </div>
+            </div>
+
+         </div>
+       </div>
+       
+       <aside id="column-right" class="col-sm-4 col-md-4 col-xs-12 col-lg-4 col-xl-4">
+         <div class="list-group accolumn">
+           <ul style="list-style: none;">
+               <h3>Order Summary</h3> 
+               <li><span class="text-decor">Total: </span>${{total}}</li>
+               <li><span class="text-decor">Tax: </span>${{tax}} </li>
+               <li><span class="text-decor">Grand Total: </span>${{grand_total}} </li>
+               <hr class="producthr">
+               {% if not cart_items %}
+                  <button type="button" id="button-cart" disabled data-loading-text="Loading..."
+                  class="btn btn-lg  add-to-cart btn-primary">Checkout</button>
+                {% else %}
+                  <a href="{% url 'checkout' %}" id="button-cart" data-loading-text="Loading..."
+                  class="btn btn-lg  add-to-cart btn-primary">Checkout</a>
+                {% endif %}
+           </ul>
+         </div>
+     </aside>
+     
+   <!-- </form> -->
+   
+     </div>
+   </div>
+   
+    <!-- SVG Symbol for Trash Icon -->
+    <svg style="display: none;">
+     <symbol id="trash-icon" viewBox="0 0 24 24">
+       <path d="M3 6h18M10 11v6M14 11v6M5 6v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6H5zm5-4h4a1 1 0 0 1 1 1v1H9V3a1 1 0 0 1 1-1z" />
+     </symbol>
+   </svg>
+
+{% endblock %}

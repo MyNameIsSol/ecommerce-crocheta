@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h1>Send Email to All Users</h1>
+  
+  <form method="post" class="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label for="subject">Subject:</label><br>
+        <input type="text" name="subject" id="subject" style="width: 100%;" required>
+    </div>
+    <br>
+    <div>
+        <label for="message">Message:</label><br>
+        <textarea name="message" id="message" rows="10" style="width: 100%;" required></textarea>
+    </div>
+    <br>
+    <button type="submit" class="button">Send Email</button>
+  </form>
+{% endblock %}

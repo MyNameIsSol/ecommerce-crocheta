@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="breadbg">
+    <div class="container">
+      <div class="row">
+        <ul class="breadcrumb">    <li><a href="index.php-33.html?route=common/home"><i class="fa fa-home"></i></a></li>    <li><a href="index.php-39.html?route=account/account">Account</a></li>    <li><a href="index.php-39.html?route=account/login">Login</a></li>    </ul>
+    </div>
+  </div>
+  </div>
+  <div id="account-login" class="container acpage">  <div class="row">    
+      <div id="content" class="col-sm-12 col-md-12 col-xs-12 colright">
+        <div class="row">
+            {% include 'includes/alerts.html' %}
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <div class="well">
+              <h1>Billing Address</h1>
+              <p><strong>Please provide the information below to proceed.</strong></p>
+              <form action="{% url 'place_order' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
+                        <label class="control-label" for="input-name">First Name</label>
+                        <input type="text" name="first_name" value="" placeholder="First Name" id="input-name" class="form-control">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
+                        <label class="control-label" for="input-name">Last Name</label>
+                        <input type="text" name="last_name" value="" placeholder="Last Name" id="input-name" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
+                        <label class="control-label" for="input-email">E-Mail</label>
+                        <input type="email" name="email" value="" placeholder="E-Mail" id="input-email" class="form-control">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
+                        <label class="control-label" for="input-telephone">Telephone</label>
+                        <input type="tel" name="phone" value="" placeholder="Telephone" id="input-telephone" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                        <label class="control-label" for="input-address">Address Line 1</label>
+                        <input type="text" name="address_line_1" value="" placeholder="Address Line 1" id="input-address" class="form-control">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                        <label class="control-label" for="input-address">Address Line 2</label>
+                        <input type="text" name="address_line_2" value="" placeholder="Address Line 2" id="input-address" class="form-control">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                        <label class="control-label" for="input-postcode">Postcode</label>
+                        <input type="text" name="postcode" value="" placeholder="Postcode" id="input-postcode" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                        <label class="control-label" for="input-city">City</label>
+                        <input type="text" name="city" value="" placeholder="Current City" id="input-city" class="form-control">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                        <label class="control-label" for="input-state">State</label>
+                        <input type="text" name="state" value="" placeholder="State" id="input-state" class="form-control">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                        <label class="control-label" for="input-country">Country</label>
+                        <input type="text" name="country" value="" placeholder="Country" id="input-country" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group">
+                        <label class="control-label" for="input-note">Order Note</label>
+                        <textarea type="text" name="order_note" placeholder="Order Note" id="input-order" rows="2" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <h1>Shipping Methods</h1>
+                <!-- <p><strong>Choose a shipping choice</strong></p> -->
+                
+                    <div class="form-group">
+                        {% for method in shipping_methods %}
+                            <div class=" mb-3" style="display: flex !important; text-align: start; align-items:center; justify-content: space-between;">
+                                <div class="" style="display: flex !important; align-items:center; gap:10px">
+                                    <div class="align-items-start">
+                                        <input type="radio" id="shipping_method_{{ method.id }}" name="shipping_method" value="{{ method.id }}" selected>
+                                    </div>
+                
+                                    <div class="">
+                                        <label for="shipping_method_{{ method.id }}" class="mb-0">
+                                            <strong>{{ method.method_name }}</strong> <br>
+                                            <small class="text-muted">{{ method.description }}</small>
+                                        </label>
+                                    </div>
+                                </div>
+            
+                                <div class="" style="text-align: right;">
+                                    <small class="text-muted">${{ method.price }}</small>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                
+            </div>
+          </div>
+  
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <div class="well">
+                <h1>Orders</h1>
+                <p><strong>Your cart items</strong></p>
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                              <th colspan="2">Product</th>
+                              <th>Quantity</th>
+                              <th>Price</th>
+                            </tr>
+                            </thead>
+                      <tbody>
+                       {% for cart_item in cart_items %}
+                        <tr>
+                          <td class="d-flex align-items-center">
+                            <img src="{{ cart_item.product.images.url }}" alt="Product Image" style="width:100%; height:auto;" class="img-fluid product-image">
+                           </td>
+                           <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal;">
+                           <a href="{{ cart_item.product.get_url }}"><span class="ms-3 product-name ">{{ cart_item.product.product_name }}</span> </a>
+                           {% if cart_item.variations.all %}
+                             {% for item in cart_item.variations.all %}
+                             <p class="text-muted small">{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }}</p>
+                             {% endfor %}
+                           {% endif %}
+                           </td>
+   
+                          <td class="text-center" style="white-space: nowrap;">{{ cart_item.quantity }}
+                          </td>
+      
+                          <td class="text-center  price">
+                           <p class="fw-bold" style="margin-bottom: 2px;">${{ cart_item.sub_total }}</p>
+                           <span style="font-size: 12px;color: gray;">${{ cart_item.product.price }} each</span></td>
+                        </tr>
+                        {% endfor %}
+                        <!-- Repeat <tr> for each product in the cart -->
+                      </tbody>
+                    </table>
+                  </div>
+                  <input type="submit" value="Place Order" class="btn btn-primary">  
+                  
+                  
+            </form>
+          </div>
+  
+        </div>
+        </div>
+       </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .well{
+      border: 0;
+      box-shadow: 0px 0 3px 2px rgba(0,0,0,.05);
+      margin: 0 auto !important;
+    }
+    .logo-receipt{
+        margin-top: 30px;
+    }
+  </style>
+    <!-- SVG Sprite with Lock Icon -->
+<svg style="display: none;">
+    <symbol id="acllock" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C9.79 2 8 3.79 8 6v4H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2h-2V6c0-2.21-1.79-4-4-4zm-1 4c0-.55.45-1 1-1s1 .45 1 1v4h-2V6zm-3 6h10v10H6V12z"/>
+    </symbol>
+  </svg>
+<div class="breadbg">
+  <div class="container">
+    <div class="row">
+      <ul class="breadcrumb">    
+        <li><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>    
+        <li><a href="#">Account</a></li>    
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>    </ul>
+  </div>
+</div>
+</div>
+<div id="account-login" class="container acpage">
+    {% include 'includes/alerts.html' %}
+    <div class="row">
+        {% include 'includes/dashboard_sidebar.html' %}
+        <!-- <aside id="column-right" class="col-sm-4 col-md-3 col-xs-12">
+            <div class="list-group accolumn">
+            <h3 class="">DASHBOARD</h3>    
+            <a href="{% url 'dashboard' %}" class="list-group-item"><i class="fa fa-home mr-2"></i> home</a> 
+            <a href="index.php-38.html?route=account/register" class="list-group-item"><svg class="" width="14px" height="14px"> <use xlink:href="#aclorder"></use> </svg> My Order</a> 
+            <a href="index.php-154.html?route=account/forgotten" class="list-group-item"><svg class="" width="14px" height="14px"> <use xlink:href="#acluser"></use> </svg> Edit Profile</a>  
+            <a href="index.php-39.html?route=account/account" class="list-group-item"><svg class="icon" width="14px" height="14px"><use xlink:href="#acllock"></use></svg> Change Password</a>
+            <hr class="producthr">
+            <a href="{% url 'logout' %}" class="list-group-item"><svg class="icon" width="14px" height="14px"><use xlink:href="#aclogout"></use></svg> Logout</a>
+        
+        </div>
+        </aside> -->
+
+        <div id="content" class="col-sm-8 col-md-9 col-xs-12 colright">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                    
+                    <div class="well pt-5">
+                        <h1 style="border-bottom: 0; margin-bottom: 0; line-height: 10px;">
+                            
+                            <h2 style="text-align: center; font-size: 18px; margin-top: 10px;">Payment Successful</h2>
+                        </h1>
+                         
+                        <h1 style="line-height: 50px; border-bottom: 0; display: flex !important; justify-content: space-between;"><img src="{% static 'image/catalog/crocheta-logo-new.png' %}" alt="" style="max-width: 60px;"> </h1>
+                          <div class="personal-one" style="display: flex; justify-content: space-between; text-align: start; margin-bottom: 60px;">
+                            <div class="name"  style="word-break: break-word;">
+                                <p ><strong style="font-size: 18px; line-height: 40px; letter-spacing: 0.8px;">{{ order.full_name }}</strong></p>
+                                <p style="margin-bottom: 2px !important">Order Date: <b style="font-weight: 700;">{{ order.created_at }}</b></p>
+                                <p style="margin-bottom: 2px !important">Order Number: <b style="font-weight: 700;">{{ order.order_number }}</b></p>
+                                <p style="margin-bottom: 2px !important">Status: <b style="font-weight: 700;">{{ order.payment.status }}</b></p>
+                            </div>
+                            <div class="email" style="word-break: break-word; text-align: right;">
+                                <p style="margin-bottom: 2px !important;">{{order.full_address}}</p>
+                                <p style="margin-bottom: 2px !important">{{order.city}} {{order.state}}, {{order.postcode}}</p>
+                                <p style="margin-bottom: 2px !important">{{order.country}}</p>
+                                <p style="margin-bottom: 2px !important">{{ order.email }}</p>
+                            </div>
+                        </div>
+                     
+                        <div class="table-responsive" style="border: 0;">
+                            <table class="table table-borderless">
+                                <thead class="text-muted">
+                                    <tr class="small text-uppercase">
+                                      <th>Product</th>
+                                      <th>Quantity</th>
+                                      <th>Price</th>
+                                    </tr>
+                                    </thead>
+                              <tbody>
+                                {% for item in order_detail %}
+                                <tr>
+                                   <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal;">
+                                   <p class="ms-3 product-name " style="font-size:14px; line-height: 15px">{{ item.product.product_name }}</p>
+                                   {% if item.variations.all %}
+                                     {% for i in item.variations.all %}
+                                     <p class="text-muted small" style="line-height: 8px">{{ i.variation_category | capfirst }} : {{ i.variation_value | capfirst }}</p>
+                                     {% endfor %}
+                                   {% endif %}
+                                   </td>
+           
+                                  <td class="text-start" style="white-space: nowrap;">{{ item.quantity }}
+                                  </td>
+              
+                                  <td class="text-start  price">
+                                   <p class="fw-bold" style="margin-bottom: 2px; text-align: start;">${{ item.product_price }}</p>
+                                   <!-- <span style="font-size: 12px;color: gray;">${{ cart_item.product.price }} each</span> -->
+                                </td>
+                                </tr>
+                                {% endfor %}
+                                <!-- Repeat <tr> for each product in the cart -->
+                                    
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                    <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal;">
+                                    
+                                    </td>
+            
+                                <td class="text-start" style="white-space: nowrap;">Sub Total:
+                                </td>
+            
+                                <td class="text-start  price">
+                                    <p class="fw-bold" style="margin-bottom: 2px; text-align: start;">${{ subtotal }}</p>
+                                    <!-- <span style="font-size: 12px;color: gray;">${{ cart_item.product.price }} each</span> -->
+                                </td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>  
+                          
+                          <div class="table-responsive" style="border: 0; margin-top: 50px; margin-bottom: 30px;">
+                            <table class="table table-borderless">
+                                <thead class="text-muted">
+                                    <tr class="small text-uppercase">
+                                      <th>Transaction ID</th>
+                                      <th>Shipping Fee</th>
+                                      <th>Tax</th>
+                                      <th>Grand Total</th>
+                                    </tr>
+                                    </thead>
+                              <tbody>
+                                <tr>
+                                   <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal; border-bottom: 2px solid #ddd;padding: 20px 0;">
+                                    #{{ order.payment.payment_id }}
+                                   </td>
+           
+                                  <td class="text-start" style="white-space: nowrap; border-bottom: 2px solid #ddd; padding: 20px 0;">${{ order.shipping_method.price }}
+                                  </td>
+              
+                                  <td class="text-start" style="white-space: nowrap; border-bottom: 2px solid #ddd; padding: 20px 0;">${{order.tax}}
+                                </td>
+                                <td class="text-start" style="white-space: nowrap; border-bottom: 2px solid #ddd; padding: 20px 0;"><b style="font-weight: 900; margin: 0; padding: 0; font-size: 14px; color: #FF69B4;">${{order.order_total}}</b>
+                                </td>
+                                </tr>
+                                <!-- Repeat <tr> for each product in the cart -->
+                              </tbody>
+                            </table>
+                          </div>  
+                    </div>
+
+                </div>
+
+               
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

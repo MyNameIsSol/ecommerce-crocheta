@@ -15,14 +15,15 @@
     </div>
   </div>
   <div id="product-product" class="container">
-
+    {% include 'includes/alerts.html' %}
     <div class="row">
       <div id="content" class="col-xs-12">
         <div class="productbg">
           <div class="row">
             <div class="col-sm-6 col-lg-5 col-md-6 col-xs-12 proimg sticky">
               <ul class="thumbnails">
-                <li><a class="thumbnail" href="{{ single_product.images.url }}"
+                <li>
+                  <a class="thumbnail" href="{{ single_product.images.url }}"
                     title="{{ single_product.product_name }}">
                     <img
                       data-zoom-image="{{ single_product.images.url }}"
@@ -30,39 +31,26 @@
                       alt="image">
                   </a>
                 </li>
-                <!-- <div class="row">
-                  <li id="gallery_01" class="owl-carousel"> <a
-                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/6-800x800.jpg' %}"
-                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/6-800x800.jpg' %}"
-                      href="{% static 'image/cache/catalog/product/6-800x800.jpg' %}" class="col-xs-12 addpa">
-                      <img src="{% static 'image/cache/catalog/product/6-120x120.jpg' %}" class="img-responsive center-block"
+                <div class="row">
+                  <li id="gallery_01" class="owl-carousel">
+                    {% for product_image in product_gallery %}
+                    <a
+                      data-zoom-image="{{product_image.image.url}}"
+                      data-image="{{product_image.image.url}}"
+                      href="{{product_image.image.url}}" class="col-xs-12 addpa">
+                      <img src="{{product_image.image.url}}" class="img-responsive center-block"
                         alt="additional image">
-                    </a> <a
-                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/28-800x800.jpg' %}"
-                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/28-800x800.jpg' %}"
-                      href="{% static 'image/cache/catalog/product/28-800x800.jpg' %}" class="col-xs-12 addpa">
-                      <img src="{% static 'image/cache/catalog/product/28-120x120.jpg' %}" class="img-responsive center-block"
-                        alt="additional image">
-                    </a> <a
-                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/27-800x800.jpg' %}"
-                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/27-800x800.jpg' %}"
-                      href="{% static 'image/cache/catalog/product/27-800x800.jpg' %}" class="col-xs-12 addpa">
-                      <img src="{% static 'image/cache/catalog/product/27-120x120.jpg' %}" class="img-responsive center-block"
-                        alt="additional image">
-                    </a> <a
-                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/24-800x800.jpg' %}"
-                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/24-800x800.jpg' %}"
-                      href="{% static 'image/cache/catalog/product/24-800x800.jpg' %}" class="col-xs-12 addpa">
-                      <img src="{% static 'image/cache/catalog/product/24-120x120.jpg' %}" class="img-responsive center-block"
-                        alt="additional image">
-                    </a> <a
-                      data-zoom-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/23-800x800.jpg' %}"
-                      data-image="https://opencart.dostguru.com/FS01/fashpad_01/{% static 'image/cache/catalog/product/23-800x800.jpg' %}"
-                      href="{% static 'image/cache/catalog/product/23-800x800.jpg' %}" class="col-xs-12 addpa">
-                      <img src="{% static 'image/cache/catalog/product/23-120x120.jpg' %}" class="img-responsive center-block"
-                        alt="additional image">
-                    </a> </li>
-                </div> -->
+                    </a>
+                    <a
+                    data-zoom-image="{{ single_product.images.url }}"
+                    data-image="{{ single_product.images.url }}"
+                    href="{{ single_product.images.url }}" class="col-xs-12 addpa">
+                    <img src="{{ single_product.images.url }}" class="img-responsive center-block"
+                      alt="additional image">
+                  </a>
+                    {% endfor %}
+                  </li>
+                </div>
               </ul>
             </div>
             <div class="col-lg-7 col-md-6 col-xs-12 col-sm-6 pro-content">
@@ -74,9 +62,16 @@
                     class="textdeb">Apple</a></li>
                 <li><span class="text-decor">Product Code:</span>Product 15</li>
                 <li><span class="text-decor">Collection:</span>100 product</li>
-                <li><span class="text-decor">Availability:</span>In Stock</li>
+                <li><span class="text-decor">Availability:</span>
+                    {% if single_product.stock > 0 %}
+                    In Stock
+                    {% else %}
+                    Out Of Stock
+                    {% endif %}
+                </li>
                 <hr class="producthr">
               </ul>
+
               <ul class="list-unstyled">
                 <li class="text-decor-bold">
                   <h2 class="pro-price">$122.00</h2>
@@ -85,57 +80,94 @@
                 <li>
                   <hr class="producthr">
                 </li>
-                
               </ul>
+
+              <form action="{% url 'add_cart' single_product.id %}" method="POST">
+                {% csrf_token %}
               <div id="product">
                 <hr class="producthr">
                 <h3>Available Options</h3>
                 <div class="form-group required">
-                  <label class="control-label text-decorop">Radio</label>
+                  <label class="control-label text-decorop">Sizes</label>
                   <div id="input-option218" class="custom-radio">
                     <div class="radio">
                       <label>
-                        <input type="radio" name="option[218]" value="5">Small (+$12.00) </label>
+                        <input type="radio" name="size" value="default" checked> Default </label>
                     </div>
+                    {% for size in single_product.variation_set.sizes %}
                     <div class="radio">
-                      <label>
-                        <input type="radio" name="option[218]" value="6">Medium (+$24.00) </label>
+                        <label>
+                            {% if size.stock > 0 %}
+                            <input type="radio" name="size" value="{{ size.variation_value | lower }}"> {{ size.variation_value | capfirst }} 
+                            {% else %}
+                            <span class="text-danger"> {{ size.variation_value | capfirst }} (Out of Stock) </span>
+                            {% endif %}
+                        </label>
                     </div>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="option[218]" value="7">Large (+$36.00) </label>
-                    </div>
+                    {% endfor %}
+
                   </div>
                 </div>
 
                 <div class="form-group required">
-                  <label class="control-label text-decorop" for="input-option217">Select</label>
-                  <select name="option[217]" id="input-option217" class="form-control">
-                    <option value=""> --- Please Select --- </option>
-                    <option value="4">Red (+$4.80) </option>
-                    <option value="3">Blue (+$3.60) </option>
-                    <option value="1">Green (+$1.20) </option>
-                    <option value="2">Yellow (+$2.40) </option>
+                  <label class="control-label text-decorop" for="input-option217">Colour</label>
+                  <select name="color" id="input-option217" class="form-control">
+                    <option value="default" > --- Please Select --- </option>
+                    {% for color in single_product.variation_set.colors %}
+                    {% if color.stock > 0 %}
+                    <option value="{{ color.variation_value | lower }}">{{ color.variation_value | capfirst }}</option>
+                    {% else %}
+                    <option value="{{ color.variation_value | lower }}" disabled>
+                        {{ color.variation_value | capfirst }} (Out of Stock)
+                    </option>
+                    {% endif %}
+                    {% endfor %}
                   </select>
                 </div>
                 
                 <div class="form-group">
                   <hr class="producthr">
-                  <button type="button" id="button-cart" data-loading-text="Loading..."
+
+                  {% if single_product.stock <= 0 %}
+                  <button type="button" disabled id="button-cart" data-loading-text="Loading..."
+                  class="btn pcrt add-to-cart btn-primary">out of stock</button>
+                  {% else %}
+                    <button type="submit" id="button-cart" data-loading-text="Loading..."
                     class="btn pcrt add-to-cart btn-primary">add to cart</button>
-                  <button type="button" data-toggle="tooltip" title="Add to Wish List" class="btn pcrt btn-primary"
-                    onclick="wishlist.add('42');"><svg width="18px" height="17px">
+                    <!-- <a href="{% url 'add_cart' single_product.id %}" id="button-cart" data-loading-text="Loading..."
+                    class="btn pcrt add-to-cart btn-primary">add to cart</a> -->
+                  {% endif %}
+                </form>
+
+                    <a href="{% url 'cart' %}" data-toggle="tooltip" title="View Cart"
+                    class="btn pcrt btn-primary"><svg width="18px" height="17px">
+                      <use xlink:href="#pcart"></use>
+                    </svg></a>
+
+                  <button type="button" data-toggle="tooltip" title="Like" class="btn pcrt btn-primary"
+                    ><svg width="18px" height="17px">
                       <use xlink:href="#heart"></use>
                     </svg></button>
-                  <button type="button" data-toggle="tooltip" title="Compare this Product" class="btn pcrt  btn-primary"
-                    onclick="compare.add('42');"><svg width="18px" height="17px">
+
+                    <a href=" {% for category in links %}
+                                {% if single_product.category == category  %}
+                                  {{ category.get_url }}
+                                {% endif %}
+                              {% endfor %}" data-toggle="tooltip" title="Compare this Product" class="btn pcrt  btn-primary"
+                    ><svg width="18px" height="17px">
                       <use xlink:href="#compare"></use>
-                    </svg></button>
+                    </svg></a>
                   <hr class="producthr">
                 </div>
+                
                 <!-- Quantity option end -->
+                {% if single_product.stock > 0 %}
                 <div class="alert alert-info palert"><i class="fa fa-info-circle"></i>This product has a minimum
-                  quantity of 2</div>
+                  quantity of {{ single_product.stock }}</div>
+                  {% else %}
+                  <div class="alert alert-danger palert"><i class="fa fa-info-circle"></i>This product has a minimum
+                    0</div>
+                    {% endif %}
               </div>
               <div class="rating">
                 <li><span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i
@@ -154,18 +186,7 @@
                   <a id="ratep" href="#rt" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write
                     a review</a>
                 </li>
-                <hr class="producthr">
-                <!-- AddToAny BEGIN -->
-                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-                  <a class="a2a_button_facebook"></a>
-                  <a class="a2a_button_twitter"></a>
-                  <a class="a2a_button_google_plus"></a>
-                  <a class="a2a_button_pinterest"></a>
-                  <a class="a2a_button_linkedin"></a>
-                  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-                </div>
-                <script async="" src="../../menu/page.js"></script>
-                <!-- AddToAny END -->
+               
               </div>
             </div>
           </div>
@@ -271,77 +292,67 @@
             </div>
             <div class="row xspspace rless">
               <div id="related" class="owl-carousel owl-theme">
+                
+                {% for product in products %}
                 <div class="col-xs-12 col-sm-12 product-layout col-xs-12 cless">
                   <div class="product-thumb transition">
-                    <div class="image"><a href="index.php-46.html?route=product/product&amp;product_id=40"><img
-                          src="{% static 'image/cache/catalog/product/26-315x315.jpg' %}" alt="Nunc commodo euismod est et sagittis"
-                          title="Nunc commodo euismod est et sagittis" class="img-responsive center-block"></a>
+                    <div class="image"><a href="{{ product.get_url }}"><img
+                          src="{{ product.images.url }}" alt="{{ product.product_name }}"
+                          title="{{ product.product_name }}" class="img-responsive center-block"></a>
                       <!-- -->
-
 
                     </div>
                     <div class="caption">
                       <!--          <div class="rating">          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span></div> -->
-                      <h4 class="protitle"><a href="index.php-46.html?route=product/product&amp;product_id=40">Nunc
-                          commodo euismod est et sagittis</a></h4>
-                      <div class="price">$123.20 </div>
+                      <h4 class="protitle"><a href="{{ product.get_url }}">
+                        {{ product.product_name }}</a></h4>
+                      <div class="price">NGN {{ product.price }}</div>
 
                       <div class="button-group">
-                        <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('40');"><svg>
+                        <form action="
+                        {% if product.variation_set.exists %}
+                          {{ product.get_url }}
+                        {% else %}
+                          {% url 'add_cart' product.id %}
+                        {% endif %}
+                        " style="display: inline;" method="post">
+                          {% csrf_token %}
+                        <button type="submit" data-toggle="tooltip" title="add to cart" ><svg>
                             <use xlink:href="#pcart"></use>
                           </svg></button>
-                        <button type="button" data-toggle="tooltip" title="Add to Wish List"
-                          onclick="wishlist.add('40');"><svg>
+                        </form>
+
+                        <button type="button" data-toggle="tooltip" title="Like"
+                          ><svg>
                             <use xlink:href="#heart"></use>
                           </svg></button>
-                        <button type="button" data-toggle="tooltip" title="Compare this Product"
-                          onclick="compare.add('40');"><svg>
+                          
+                          <form action="{% for category in links %}
+                          {% if product.category == category  %}
+                            {{ category.get_url }}
+                          {% endif %}
+                        {% endfor %}" style="display: inline;" method="post">
+                            {% csrf_token %}
+                        <button type="submit" data-toggle="tooltip" title="Compare this Product"
+                          ><svg>
                             <use xlink:href="#compare"></use>
                           </svg></button>
-                        <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
+                        </form>
+
+                          <form action="{{ product.get_url }}" style="display: inline;" method="post">
+                            {% csrf_token %}
+                        <button type="submit" data-toggle="tooltip" title="Quickview"><svg>
+                          <use xlink:href="#bquick"></use>
+                        </svg></button>
+                        </form>
                       </div>
 
                     </div>
-
                   </div>
                 </div>
+                {% endfor %}
                 <!-- -->
-                <div class="col-xs-12 col-sm-12 product-layout col-xs-12 cless">
-                  <div class="product-thumb transition">
-                    <div class="image"><a href="index.php-45.html?route=product/product&amp;product_id=41"><img
-                          src="{% static 'image/cache/catalog/product/11-315x315.jpg' %}"
-                          alt="Nunc tincidunt turpis eget malesuada accumsan"
-                          title="Nunc tincidunt turpis eget malesuada accumsan" class="img-responsive center-block"></a>
-                      <!-- -->
-
-
-                    </div>
-                    <div class="caption">
-                      <!--          <div class="rating">          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span></div> -->
-                      <h4 class="protitle"><a href="index.php-45.html?route=product/product&amp;product_id=41">Nunc
-                          tincidunt turpis eget malesuada accumsan</a></h4>
-                      <div class="price">$122.00 </div>
-
-                      <div class="button-group">
-                        <button type="button" data-toggle="tooltip" title="add to cart" onclick="cart.add('41');"><svg>
-                            <use xlink:href="#pcart"></use>
-                          </svg></button>
-                        <button type="button" data-toggle="tooltip" title="Add to Wish List"
-                          onclick="wishlist.add('41');"><svg>
-                            <use xlink:href="#heart"></use>
-                          </svg></button>
-                        <button type="button" data-toggle="tooltip" title="Compare this Product"
-                          onclick="compare.add('41');"><svg>
-                            <use xlink:href="#compare"></use>
-                          </svg></button>
-                        <div data-toggle="tooltip" title="Quickview" class="bquickv"></div>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </div>
-                <!-- -->
+           
               </div>
             </div>
           </div>
@@ -350,4 +361,68 @@
     </div>
   </div>
 
+  <script>
+$(document).ready(function() {
+$('.thumbnails').magnificPopup({
+type:'image',
+delegate: 'a',
+gallery: {
+enabled: true
+}
+});
+});
+  </script>
+
+<script>
+  if (jQuery(window).width() >= 1200) {
+    //initiate the plugin and pass the id of the div containing gallery images
+    $("#zoom_03").elevateZoom({ gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true, loadingIcon: '' });
+    //pass the images to Fancybox
+    $("#zoom_03").bind("click", function (e) {
+      var ez = $('#zoom_03').data('elevateZoom');
+      $.fancybox(ez.getGalleryList());
+      return false;
+    });
+  }
+</script>
+<!--ZOOM END-->
+
+<script type="text/javascript">
+  (function ($) {
+    $("#related").owlCarousel({
+      itemsCustom: [
+        [0, 1],
+        [320, 2],
+        [600, 3],
+        [992, 3],
+        [1200, 4],
+        [1410, 4]
+      ],
+      // autoPlay: 1000,
+      navigationText: ['<svg width="15px" height="15px"><use xlink:href="#arleft"></use></svg>', '<svg width="15px" height="15px"><use xlink:href="#arright">'],
+      navigation: true,
+      pagination: false
+    });
+  }(jQuery));
+</script>
+
+<!--slider for product-->
+<script type="text/javascript">
+$('#gallery_01').owlCarousel({
+itemsCustom : [
+[0, 2],
+[320, 3],
+[600, 5],
+[768, 4],
+[992, 4],
+[1200, 4],
+[1410, 4]
+],
+autoPlay: 1000,
+autoPlay: true,
+navigation: false,
+navigationText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+pagination: false
+});
+</script>
 {% endblock %}

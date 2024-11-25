@@ -77,89 +77,50 @@
             </div>
             <ul class="sblock">
               <li><a href="{% url 'home' %}">home</a></li>
-              <li><a href="index.php-34.html?route=product/special">specials</a></li>
-              <li><a href="index.php-35.html?route=information/contact">contact</a></li>
-              <li><a href="index.php-36.html?route=account/return/add">returns</a></li>
-              <li><a href="index.php-37.html?route=information/blogger/blogs">blog</a></li>
+              <li><a href="{% url 'about' %}">about</a></li>
+              <li><a href="{% url 'contact' %}">contact</a></li>
+              <li><a href="{% url 'login' %}">returns</a></li>
+              <li><a href="{% url 'service' %}">services</a></li>
 
             </ul>
           </div>
 
           <div id="logo" class="col-lg-3 col-md-2 col-sm-3 col-xs-12 hlogo"><a
-              href="{% url 'home' %}"><img src="{% static 'image/catalog/logo.png' %}" title="fashpad" alt="fashpad"
+              href="{% url 'home' %}"><img src="{% static 'image/catalog/crocheta-logo-fl.png' %}" style="height:24px; max-width:122px" title="crochetandhooks" alt="crochetandhooks"
                 class="img-responsive"></a> </div>
           <div id="top-links" class="col-lg-3 col-md-4 col-sm-8 col-xs-12 text-right">
             <ul class="list-inline">
               <li class="serchapp d-inline-block">
                 <div id="search" class="desktop-search d-inline-block">
-                  <div class="d-search">
-                    <button id="search_toggle" class="search-toggle" data-toggle="collapse" onclick="openSearch()">
-                      <svg>
-                        <use xlink:href="#hsearch"></use>
-                      </svg>
-                    </button>
-                  </div>
-                  <div id="search" class="wbSearch">
-                    <div id="search_block_top">
-                      <select id="madebyhand-search-category">
-                        <option value="0">Categories</option>
-                        <option value="79">fashion</option>
-                        <option value="20"> Women</option>
-                        <option value="74">&nbsp;&nbsp;&nbsp;&nbsp;fashion Wear</option>
-                        <option value="75">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dresses</option>
-                        <option value="76">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-Shirts</option>
-                        <option value="27">&nbsp;&nbsp;&nbsp;&nbsp;Women Footwear</option>
-                        <option value="59">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flats</option>
-                        <option value="60">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heels</option>
-                        <option value="81">kides</option>
-                        <option value="18">men</option>
-                        <option value="46">&nbsp;&nbsp;&nbsp;&nbsp;Bottomwear</option>
-                        <option value="45">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jeans</option>
-                        <option value="69">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-Shirts</option>
-                        <option value="68">&nbsp;&nbsp;&nbsp;&nbsp;Topwear </option>
-                        <option value="70">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Casual Shirts</option>
-                        <option value="71">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formal Shirts</option>
-                        <option value="25">jeans</option>
-                        <option value="28">&nbsp;&nbsp;&nbsp;&nbsp;accessories</option>
-                        <option value="67">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clothes</option>
-                        <option value="66">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;men</option>
-                        <option value="65">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;women</option>
-                        <option value="30">&nbsp;&nbsp;&nbsp;&nbsp;fashion</option>
-                        <option value="64">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorts</option>
-                        <option value="31">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clothes</option>
-                        <option value="32">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jeans</option>
-                        <option value="29">&nbsp;&nbsp;&nbsp;&nbsp;Clothes</option>
-                        <option value="63">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dresses</option>
-                        <option value="35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-Shirts</option>
-                        <option value="36">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;women</option>
-                        <option value="17">T-Shirts</option>
-                        <option value="24">Clothes</option>
-                        <option value="33">Sports </option>
-                        <option value="80">dresses</option>
-                      </select>
-                      <div class="input-group">
-                        <input type="text" name="search" value="" placeholder="Search..."
-                          class="search_query form-control input-lg madebyhand-search">
-                        <div class="input-group-btn">
-                          <button type="button" class="btn btn-primary btn-lg"><i
-                              class="fa fa-search  hidden-sm hidden-md hidden-lg"></i> <svg width="15px" height="15px">
-                              <use xlink:href="#hsearch"></use>
-                            </svg></button>
-                          <a href="javascript:void(0)" class="closebtn close-nav" onclick="closeSearch()"><i
-                              class="fa fa-close"></i></a>
+                  <form action="{% url 'search' %}" method="GET">
+                        {% csrf_token %}
+                        <div class="d-search">
+                          <button type="submit" id="search_toggle" class="search-toggle" data-toggle="collapse" onclick="openSearch()">
+                            <svg><use xlink:href="#hsearch"></use></svg>
+                          </button>
                         </div>
-                        <!-- madebyhand Search Start  -->
-                        <div class="madebyhand-search text-left">
-                          <div class="madebyhand-search-loader" style="display: none;">
-                            <div class="loaders"></div>
-                          </div><!-- Add Loader -->
-                          <div class="madebyhand-search-result"><!-- search results --></div>
+                        <div id="search" class="wbSearch">
+                          <div id="search_block_top">
+                          
+                            <div class="input-group">
+                              <input type="text" name="search" value="" placeholder="Search..."
+                                class="search_query form-control input-lg madebyhand-search">
+
+                              <div class="input-group-btn">
+                                <button type="submit" class="btn btn-primary btn-lg"><i
+                                    class="fa fa-search  hidden-sm hidden-md hidden-lg"></i> <svg width="15px" height="15px">
+                                    <use xlink:href="#hsearch"></use>
+                                  </svg></button>
+
+                                <a href="javascript:void(0)" class="closebtn close-nav" onclick="closeSearch()"><i
+                                    class="fa fa-close"></i></a>
+
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <!-- madebyhand Search End  -->
                       </div>
-                    </div>
-                  </div>
-                </div>
+                  </form>
 
                 <script type="text/javascript">
                   $(document).ready(function () {
@@ -169,6 +130,13 @@
 
                     $('.desktop-search input[type="text"]').blur(function () {
                       $(this).parent().removeClass("any_class");
+                    });
+
+                    $('.search_query').keypress(function(event) {
+                      if (event.which === 13) { // 13 is the Enter key code
+                        event.preventDefault();  // Prevent default form submission if needed
+                        $(this).closest('form').submit();  // Submit the form
+                      }
                     });
 
 
@@ -188,34 +156,55 @@
 
               </li>
               <li class="dropdown inuser">
-                <a href="index.php-39.html?route=account/account" title="My Account" class="dropdown-toggle"
+                <a href="{% url 'login' %}" title="My Account" class="dropdown-toggle"
                   data-toggle="dropdown">
                   <svg>
                     <use xlink:href="#huser"></use>
                   </svg><!-- <span class="hidden-xs">&nbsp;Register</span> -->
                 </a>
+                {% if user.id is not None %}
+                <ul class="dropdown-menu dropdown-menu-right user-down haccount hlogout">
+                  <h5 class="text-left">Welcome {{user.first_name}}</h5>
+                  <h6 class="text-left">Access account and manage orders</h6>
+                  <li class="acd"><a href="{% url 'dashboard' %}"><i class="fa fa-user-plus"></i>Dashboard</a></li>
+                  <li class="acd"><a href="{% url 'logout' %}"><i class="fa fa-lock"></i>Logout</a>
+                  </li>
+                </ul>
+                {% else %}
                 <ul class="dropdown-menu dropdown-menu-right user-down haccount hlogout">
                   <h5 class="text-left">Your Account</h5>
                   <h6 class="text-left">Access account and manage orders</h6>
-                  <li class="acd"><a href="index.php-38.html?route=account/register"><i
+                  <li class="acd"><a href="{% url 'register' %}"><i
                         class="fa fa-user-plus"></i>Register</a></li>
-                  <li class="acd"><a href="index.php-39.html?route=account/login"><i class="fa fa-lock"></i>Login</a>
+                  <li class="acd"><a href="{% url 'login' %}"><i class="fa fa-lock"></i>Login</a>
                   </li>
                 </ul>
+                {% endif %}
+
               </li>
 
               <li class="cart-but">
+                {% if cart_count <= 0 %}
                 <div id="cart" class="btn-group btn-block">
                   <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="dropdown-toggle">
                     <svg>
                       <use xlink:href="#hcart"></use>
-                    </svg><span id="cart-total">0 <span>items</span></span></button>
+                    </svg><span id="cart-total">{{ cart_count }}<span>items</span></span></button>
                   <ul class="dropdown-menu pull-right">
                     <li>
                       <p class="text-center">Your shopping cart is empty!</p>
                     </li>
                   </ul>
                 </div>
+                {% else %}
+                  <div id="cart" class="btn-group btn-block">
+                    <a href="{% url 'cart' %}" data-loading-text="Loading..." >
+                      <svg>
+                        <use xlink:href="#hcart"></use>
+                      </svg><span id="cart-total">{{ cart_count }}<span>items</span></span>
+                    </a>
+                  </div>
+                {% endif %}
               </li>
 
             </ul>

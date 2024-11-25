@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .custom-checkbox {
+    display: inline-block;  /* Make checkbox inline */
+    width: 14px;            /* Prevent full width */
+    height: 14px;           /* Adjust height if needed */
+   /* margin-right: 5px;       Space between checkbox and label */
+    vertical-align: middle; /* Align with the label text */
+}
+</style>
+
+<div class="breadbg">
+    <div class="container">
+      <div class="row">
+        <ul class="breadcrumb">    <li><a href="index.php-33.html?route=common/home"><i class="fa fa-home"></i></a></li>    <li><a href="index.php-39.html?route=account/account">Account</a></li>    <li><a href="index.php-38.html?route=account/register">Register</a></li>    </ul>
+    </div>
+  </div>
+  </div>
+  <div id="account-register" class="container acpage">  <div class="row">    
+    <div id="content" class="col-sm-8 col-md-9 col-xs-12 colright">
+        {% include 'includes/alerts.html' %}
+  <div class="infobg">
+        <h1>Register Account</h1>
+        <p>If you already have an account with us, please login at the <a href="{% url 'login' %}">login page</a>.</p>
+        <form action="{% url 'register' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            {% csrf_token %}
+          <fieldset id="account">
+            <legend>Your Personal Details</legend>
+            <div class="form-group required">
+              <label class="col-sm-3 col-xs-12 control-label" for="input-firstname">First Name</label>
+              <div class="col-sm-9 col-xs-12">
+                <!-- <input type="text" name="firstname" value="" placeholder="First Name" id="input-firstname" class="form-control">--> 
+                {{ form.first_name }}
+                </div> 
+            </div>
+            <div class="form-group required">
+              <label class="col-sm-3 col-xs-12 control-label" for="input-lastname">Last Name</label>
+              <div class="col-sm-9 col-xs-12">
+                <!-- <input type="text" name="lastname" value="" placeholder="Last Name" id="input-lastname" class="form-control">-->
+                {{ form.last_name }}
+                </div> 
+            </div>
+            <div class="form-group required">
+              <label class="col-sm-3 col-xs-12 control-label" for="input-email">E-Mail</label>
+              <div class="col-sm-9 col-xs-12">
+                <!-- <input type="email" name="email" value="" placeholder="E-Mail" id="input-email" class="form-control">  -->
+                 {{ form.email }}
+            </div>
+            </div>
+            <div class="form-group required">
+              <label class="col-sm-3 col-xs-12 control-label" for="input-telephone">Telephone</label>
+              <div class="col-sm-9 col-xs-12">
+                <!-- <input type="tel" name="telephone" value="" placeholder="Telephone" id="input-telephone" class="form-control">  -->
+                 {{ form.phone_number }}
+            </div>
+            </div>        </fieldset>
+          <fieldset>
+            <legend>Your Password</legend>
+            <div class="form-group required">
+              <label class="col-sm-3 col-xs-12 control-label" for="input-password">Password</label>
+              <div class="col-sm-9 col-xs-12">
+                <!-- <input type="password" name="password" value="" placeholder="Password" id="input-password" class="form-control">  -->
+                 {{ form.password }}
+            </div>
+            </div>
+            <div class="form-group required">
+              <label class="col-sm-3 col-xs-12 control-label" for="input-confirm">Password Confirm</label>
+              <div class="col-sm-9 col-xs-12">
+                <!-- <input type="password" name="confirm" value="" placeholder="Password Confirm" id="input-confirm" class="form-control">  -->
+                 {{ form.confirm_password }}
+            </div>
+            </div>
+          </fieldset>
+       
+          <div class="buttons">
+            <div class="text-right acspace form-check form-check-inline">I have read and agree to the <a href="index.php-155.html?route=information/information/agree&amp;information_id=3" class="agree"><b>Privacy Policy</b></a>            
+                <!-- <input type="checkbox" name="agree" value="1"> -->
+                 {{ form.agree }}
+                 &nbsp;
+              <input type="submit" value="Continue" class="btn btn-primary">
+            </div>
+          </div>
+
+          {% if form.email.errors or form.non_field_errors %}
+          <div class="alert alert-danger" role="alert">
+            {% for error in form.email.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+            {% endif %} 
+
+        </form>
+        </div></div>
+        <aside id="column-right" class="col-sm-4 col-md-3 col-xs-12 hidden-xs">
+            <div class="list-group accolumn">
+                <h3><svg class="" width="20px" height="20px"> <use xlink:href="#acluser"></use> </svg>ACCOUNT SETTINGS</h3>    
+                <a href="{% url 'login' %}" class="list-group-item">Login</a> 
+                <a href="{% url 'register' %}" class="list-group-item">Register</a> 
+                <a href="{% url 'forgotPassword' %}" class="list-group-item">Forgotten Password</a>  
+                <a href="{% url 'dashboard' %}" class="list-group-item">My Account</a>
+            </div>
+        </aside>
+    </div>
+  </div>
+   
+
+{% endblock %}

@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .custom-outline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  background-color: transparent;
+  border: 2px solid #333333;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-outline-button:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.custom-outline-button .button-icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+</style>
+<div class="breadbg">
+    <div class="container">
+      <div class="row">
+        <ul class="breadcrumb">    
+            <li><a href="index.php-33.html?route=common/home"><i class="fa fa-home"></i></a></li>    <li><a href="index.php-39.html?route=account/account">Account</a></li>    <li><a href="index.php-39.html?route=account/login">Login</a></li>    </ul>
+    </div>
+  </div>
+  </div>
+  <div id="account-login" class="container acpage">  <div class="row">    
+      <div id="content" class="col-sm-12 col-md-12 col-xs-12 colright">
+        <div class="row">
+          
+          <div class="col-sm-12 col-md-8 col-lg-8 col-xs-12">
+            <div class="well">
+                <h1>Personal Info:</h1>
+                <div class="personal-one" style="display: flex; justify-content: space-between; text-align: start;">
+                    <div class="name"  style="word-break: break-word;">
+                        <p><small class="text-muted">Full Name</small></p>
+                        <p ><strong style="font-size: 15px; line-height: 30px; letter-spacing: 0.8px;">{{ order.full_name }}</strong></p>
+                    </div>
+                    <div class="email" style="word-break: break-word;">
+                        <p><small class="text-muted">E-Mail</small></p>
+                        <p><strong style="font-size: 15px; line-height: 25px; letter-spacing: 0.8px;">{{ order.email }}</strong></p>
+                    </div>
+                </div>
+                <div class="personal-two">
+                    <p><small class="text-muted">Telephone</small></p>
+                    <p><strong style="font-size: 15px; line-height: 25px; letter-spacing: 0.8px;">{{ order.phone }}</strong></p>
+                </div>
+            </div>
+
+            <div class="well">
+                <h1>Billing Address</h1>
+                <div class="personal" style="">
+                    <div class="name">
+                        <p><small class="text-muted">Address</small></p>
+                        <p ><strong style="font-size: 14px; letter-spacing: 0.8px;">{{order.full_address}} </strong></p>
+                        <p ><strong style="font-size: 14px; letter-spacing: 0.8px;">{{order.city}}, {{order.state}} </strong></p>
+                        <p ><strong style="font-size: 14px; letter-spacing: 0.8px;">{{order.postcode}} </strong></p>
+                        <p ><strong style="font-size: 14px; letter-spacing: 0.8px;">{{order.country}} </strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="well">
+                <h1>Review Products</h1>
+                <!-- <p><strong>Choose a shipping choice</strong></p> -->
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                              <th colspan="2">Product</th>
+                              <th>Quantity</th>
+                              <th>Price</th>
+                            </tr>
+                            </thead>
+                      <tbody>
+                       {% for cart_item in cart_items %}
+                        <tr>
+                          <td class="d-flex align-items-center">
+                            <img src="{{ cart_item.product.images.url }}" alt="Product Image" style="width:70px; height:auto;" class="img-fluid product-image">
+                           </td>
+                           <td class="text-wrap" style="min-width: 150px; max-width: 250px; white-space: normal;">
+                           <a href="{{ cart_item.product.get_url }}"><span class="ms-3 product-name ">{{ cart_item.product.product_name }}</span> </a>
+                           {% if cart_item.variations.all %}
+                             {% for item in cart_item.variations.all %}
+                             <p class="text-muted small">{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }}</p>
+                             {% endfor %}
+                           {% endif %}
+                           </td>
+   
+                          <td class="text-center" style="white-space: nowrap;">{{ cart_item.quantity }}
+                          </td>
+      
+                          <td class="text-center  price">
+                           <p class="fw-bold" style="margin-bottom: 2px;">${{ cart_item.sub_total }}</p>
+                           <span style="font-size: 12px;color: gray;">${{ cart_item.product.price }} each</span></td>
+                        </tr>
+                        {% endfor %}
+                        <!-- Repeat <tr> for each product in the cart -->
+                      </tbody>
+                    </table>
+                  </div>
+                   
+            </div>
+          </div>
+  
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xs-12">
+              <div class="well">
+                <h1>Orders</h1>
+                <div class="justify-content-between" style="display: flex; justify-content: space-between; line-height: 20px;">
+                    <p><strong>Totat Price:</strong></p>
+                    <p>${{total}}</p>
+                </div>
+                <div class="justify-content-between" style="display: flex; justify-content: space-between; line-height: 20px;">
+                    <p><strong>Shipping:</strong></p>
+                    <p>${{shipping_fee}}</p>
+                </div>
+                <div class="justify-content-between" style="display: flex; justify-content: space-between; line-height: 20px;">
+                    <p><strong>Tax:</strong></p>
+                    <p>${{tax}}</p>
+                </div>
+                <div class="justify-content-between" style="display: flex; justify-content: space-between; line-height: 20px;">
+                    <p><strong>Grand Total: </strong></p>
+                    <p>${{grand_total}}</p>
+                </div>
+               
+                <button onclick="makePayment(event)" class="btn btn-primary btn-lg btn-block mt-3 d-flex align-items-center justify-content-center" style="border-radius: 5px; margin-bottom: 20px;" type="button">
+                    <img src="{% static 'image/catalog/paystack-icon.png' %}" alt="Payment Icon" class="" style="margin-right: 18px; max-width: 20px; max-height: 20px;">
+                    Pay with Paystack
+                  </button>
+
+                  <!-- <div class="custom-button-container" >
+                    <button class="custom-outline-button btn-lg btn-block">
+                        <img src="{% static 'image/catalog/crocheta-icon-colored.png' %}" alt="Payment Icon" style="max-width: 20px; max-height: 20px;">
+                      Pay Direct Transfer
+                    </button>
+                  </div> -->
+              </div>
+  
+          </div>
+        </div>
+       </div>
+  </div>
+
+  <script>
+    // Get proof upload
+    // document.getElementById("proof").addEventListener("change", function () {
+    //     const fileInput = this.files[0];
+    //     const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "application/pdf", "image/gif"];
+
+    //     if (!allowedTypes.includes(fileInput.type)) {
+    //         console.log("Invalid file type. Please upload JPG, PNG, JPEG, PDF, or GIF.");
+    //         this.value = ""; 
+    //     }
+    // });
+
+     //# code to get our csrf token manually in # 316f
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    var url = "{% url 'payments' %}" //We wrap all the django tags in a string do it can work in javascript
+    var amount = "{{grand_total}}"
+    var orderID = "{{order.order_number}}"
+    var payment_method = "Paystack"
+    var email = "{{order.email}}"
+    var phone = "{{order.phone}}"
+    var ip = "{{order.ip}}"
+    var name = "{{order.full_name}}"
+    var first_name = "{{order.first_name}}"
+    var last_name = "{{order.last_name}}"
+    var order_note = ""
+    var shipping_id = "{{shipping_id}}"
+    var cancel_url = "{% url 'checkout' %}"
+    var redirect_url = "{% url 'order_complete' %}" // # 340d(i)
+    if("{{order.order_note}}" != ""){
+        order_note = "{{order.order_note}}"
+    }
+
+    function makePayment(e){
+        e.preventDefault();
+        const api = "pk_test_a79ff14035ac6509bda5932424c6676b51af0cac";
+        var handler = PaystackPop.setup({
+        key: api, // Replace with your public key
+        email: email,
+        amount: amount * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+        currency: 'NGN', // Use NGN, GHS for Ghana Cedis or USD for US Dollars
+        ref: 'Peace-' + orderID, // Replace with a reference you generated
+        firstName: first_name,
+        lastName: last_name,
+        phone: phone,
+        metadata: {
+        custom_fields:[
+            {
+            display_name:first_name,
+            variable_name:last_name
+            }
+        ]
+        },
+        callback: function(data) {
+        sendData();
+        function sendData(){
+            const formData = new FormData();shipping_id
+            //formData.append("proof", fileInput); // Add the file
+            formData.append("shippingID", shipping_id);
+            formData.append("orderID", orderID);
+            formData.append("transID", data.transaction);
+            formData.append("payment_method", payment_method);
+            formData.append("status", data.status);
+            formData.append("transRef", data.reference);
+            // fetch(url,{method:"POST", headers:{"Content-type":"application/json", "X-CSRFToken":csrftoken,}, body: formData,})
+            fetch(url, {
+                method: "POST",
+                headers: { "X-CSRFToken": csrftoken },
+                body: formData, // Use FormData for the request
+            })
+            .then(response => response.json()) //response from database posting
+            .then(data => {
+                if (data.error) {
+                    console.log(data.error);
+                } else {
+                    window.location.href = redirect_url+'?order_number='+data.order_number+'&payment_id='+data.transID+'&payment_ref='+data.transRef;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        },
+        onClose: function(){
+        window.location.href = cancel_url+"?error=Tansaction Cancelled!";
+        alert('Window closed.');
+        },
+    });
+    handler.openIframe();
+    }
+  </script>
+  
+{% endblock %}

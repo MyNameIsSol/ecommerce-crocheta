@@ -22,7 +22,20 @@ from django.conf.urls.static import static
 from django.conf import settings 
 
 urlpatterns = [
-    path('admin/', admin.site.urls), 
-    path('', views.home, name='home'),
-    path('store/', include('store.urls'))
+    # path('admin/', admin.site.urls),
+    path('', views.home, name='home'), 
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path('securelogin/', admin.site.urls),
+    
+    path('cart/', include('cart.urls')),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    path('service/', views.contact, name='service'),
+    path('terms/', views.contact, name='terms'),
+    path('store/', include('store.urls')),
+
+    path('accounts/', include('accounts.urls')),
+    
+    path('orders/', include('orders.urls')),
+    path('email/', include('email_sender.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) # here we add static to the url to enable file uploads

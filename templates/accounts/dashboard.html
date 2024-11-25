@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- SVG Sprite with Lock Icon -->
+<svg style="display: none;">
+    <symbol id="acllock" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C9.79 2 8 3.79 8 6v4H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2h-2V6c0-2.21-1.79-4-4-4zm-1 4c0-.55.45-1 1-1s1 .45 1 1v4h-2V6zm-3 6h10v10H6V12z"/>
+    </symbol>
+  </svg>
+<div class="breadbg">
+  <div class="container">
+    <div class="row">
+      <ul class="breadcrumb">    
+        <li><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>    
+        <li><a href="#">Account</a></li>    
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>    </ul>
+  </div>
+</div>
+</div>
+<div id="account-login" class="container acpage">
+    {% include 'includes/alerts.html' %}
+    <div class="row">
+        {% include 'includes/dashboard_sidebar.html' %}
+        <!-- <aside id="column-right" class="col-sm-4 col-md-3 col-xs-12">
+            <div class="list-group accolumn">
+            <h3 class="">DASHBOARD</h3>    
+            <a href="{% url 'dashboard' %}" class="list-group-item"><i class="fa fa-home mr-2"></i> home</a> 
+            <a href="index.php-38.html?route=account/register" class="list-group-item"><svg class="" width="14px" height="14px"> <use xlink:href="#aclorder"></use> </svg> My Order</a> 
+            <a href="index.php-154.html?route=account/forgotten" class="list-group-item"><svg class="" width="14px" height="14px"> <use xlink:href="#acluser"></use> </svg> Edit Profile</a>  
+            <a href="index.php-39.html?route=account/account" class="list-group-item"><svg class="icon" width="14px" height="14px"><use xlink:href="#acllock"></use></svg> Change Password</a>
+            <hr class="producthr">
+            <a href="{% url 'logout' %}" class="list-group-item"><svg class="icon" width="14px" height="14px"><use xlink:href="#aclogout"></use></svg> Logout</a>
+        
+        </div>
+        </aside> -->
+
+        <div id="content" class="col-sm-8 col-md-9 col-xs-12 colright">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                    <div class="well text-center">
+                        <h1 style="text-transform: capitalize; font-size: 14px; text-align: left;">Account</h1>
+                        {% if userprofile.profile_picture %}
+                            <img src="{{userprofile.profile_picture.url}}" style="width: 80px; height: 80px; border-radius: 50%;" alt="">
+                        {% else %}
+                            <a href="{% url 'edit_profile' %}">Upload Picture</a>
+                        {% endif %}
+                        <p style="margin-top: 15px;"><strong>coinbase017@gmail.com</strong></p>
+                        <p style="margin-top: 10px;">+81 27715193</p>
+                       
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                    <div class="well text-center">
+                        <h1 style="text-transform: capitalize; font-size: 14px; text-align: left;">Logged in: </h1>
+                        <h2><strong style="font-size: 20px;">Total Order</strong></h2>
+                        <h2 style="font-size: 20px; margin-top: 0 !important;"><strong >{{orders_count}}</strong></h2>
+                        <a href="{% url 'store' %}" class="btn btn-primary">Visit Store</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

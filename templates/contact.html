@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="breadbg">
+    <div class="container">
+        <div class="row">
+            <ul class="breadcrumb">
+                <li><a href="index.php-33.html?route=common/home"><i class="fa fa-home"></i></a></li>
+                <li><a href="index.php-35.html?route=information/contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="information-contact" class="container">
+    <div class="row infobg">
+        <div id="content" class="col-xs-12">
+            <h1 class="heading text-center"><span>Contact Us</span></h1>
+            <div class="row">
+
+                <div class="col-md-4 col-xs-12 infocnt">
+                    <legend>Our Location</legend>
+                    <div class="">
+
+
+                        <div class="pull-left"><i class="fa fa-home"></i></div>
+                        <div class="contsp">1 Eziowelle Str,<br>
+                            Opposite Tradefair Int'l Market, Abule-Oshun <br>
+                            Lagos - 102114</div>
+                        <div class="pull-left"><i class="fa fa-phone"></i></div>
+                        <div class="contsp">+234 705 9195 916</div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xs-12">
+                    <form action="{% url 'contact' %}"
+                        method="post"  class="form-horizontal">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend>Contact Form</legend>
+                            {% include 'includes/alerts.html' %}
+                            <div class="form-group required">
+                                <label class="col-sm-3 control-label" for="input-name">Your Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="name" value="" id="input-name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-3 control-label" for="input-email">E-Mail Address</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="email" value="" id="input-email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-3 control-label" for="input-enquiry">Enquiry</label>
+                                <div class="col-sm-9">
+                                    <textarea name="message" rows="10" id="input-enquiry"
+                                        class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="buttons">
+                            <div class="pull-right">
+                                <input class="btn btn-primary" type="submit" value="Submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+# 91b of store.html, talks about adding paginating to display 6 product par page in the store.html page
+
+#Font use for this site; font-family : "Josefin Sans', sans-serif"
+
+# 113a(i) shows the use of POST in views.py of the carts app
+
+# 128 product_detail.html is were registration and accounts section starts
+
+Later Updates:
+1. change Account model  is_active to FALSE. So it returns to true when the user activates account
+2. change account_verification_email.html activation link to https:// 
+
+currency based on country
+Delivery fee based on location
+
+# 375 models.py of the account app We started creating the UserProfile model, to update the user detail
+
+
+# Important! Always close server and activate env before makemigrations
+
+# 440 of the product_details.html, we used custom.css new styling file
+
+settings.py items saved in python-decouple (.env)
+1. SECRET_KEY
+2. 
+
+Things to change in env(folder)/libs/site-packages/honeypot (admin-honeypot):
+admin.py - import : from django.utils.translation import gettext_lazy as _
+
+model.py -import : from django.utils.translation import gettext_lazy as _
+
+signals.py - change from : honeypot = Signal(providing_args=['instance', 'request'])
+                    to : honeypot = Signal()
+
+urls.py - import : from django.urls import re_path (not url)
+    also use the re_path :  re_path(r'^login/$', views.AdminHoneypot.as_view(), name='login'),
+                            re_path(r'^.*$', views.AdminHoneypot.as_view(), name='index'),
+
+views.py - import : from django.utils.translation import gettext as _
+
+Read On Django-Crispy-forms should be used to design nice forms
+
+STEPS TO UPLOAD TO SHARED HOSTING:
+1. Zip the file and upload to the home directory
+2. Unzip the file, and go to settings.py file of the project to provide EMAIL details and DATABASE details
+3. Create a python application, in the field below, type your REQUIREMENT.TXT file name (add) and (run pip install)
+4. Code to run migration on shared hosting : /home/crocheta/crochetandhooks/manage.py migrate
+5. enter the project folder and locate [passenger_wsgi.py] file which was created for us when we created our application and add the code below to it:
+            from crochetandhooks.wsgi import application
+6. Goto your settings.py of your project and provide the allowed host to be your domain: ALLOWED_HOSTS = ['crochetandhooks.com', 'www.crochetandhooks.com']
+7. Restart your APPLICATION where you created it.
+8. Visit your website using your link.
+
+           
