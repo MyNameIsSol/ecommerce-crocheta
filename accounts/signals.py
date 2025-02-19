@@ -8,10 +8,10 @@ def create_superuser(sender, **kwargs):
     if not Account.objects.filter(is_superadmin=True).exists():
         # Create the superuser
         Account.objects.create_superuser(
-            email='support@crochetandhooks.com',         # Replace with desired email
+            email='',         # Replace with desired email
             username='admin',                 # Replace with desired username
-            password='mynameispeacE1$',         # Replace with desired password
-            first_name='Peace',               # Replace with desired first name
-            last_name='Okoye'                  # Replace with desired last name
+            password='',         # Replace with desired password
+            first_name='',               # Replace with desired first name
+            last_name=''                  # Replace with desired last name
         )
         print("Superuser created!")
